@@ -40,6 +40,7 @@ router.get('/', (req, res) => {
 
 // Protected Routes  
 router.use(verifyTokenCookies);
+
 router.get('/profile', (req, res) => {
     res.json({ message: 'Protected route', userId: req.user.userId });
 });

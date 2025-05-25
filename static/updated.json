@@ -1,0 +1,160 @@
+{
+  "battery_id": "BAT1233",
+  "battery_ocv": "3.25",
+  "manufactured_timestamp": "2020-05-18T19:30:00.000Z",
+  "cell_data": [
+    {
+      "cell_id": "ACELL0015",
+      "details": {
+        "cell_id": "ACELL0015",
+        "cell_ocv": 3.1,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": {
+        "anode_id": "AN220236",
+        "cathode_id": "CH202631"
+      }
+    },
+    {
+      "cell_id": "ACELL0016",
+      "details": {
+        "cell_id": "ACELL0016",
+        "cell_ocv": 3.15,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": {
+        "anode_id": "AN220234",
+        "cathode_id": "CH202634"
+      }
+    },
+    {
+      "cell_id": "ACELL0017",
+      "details": {
+        "cell_id": "ACELL0017",
+        "cell_ocv": 3.2,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": {
+        "anode_id": "AN220235",
+        "cathode_id": "CH202635"
+      }
+    },
+    {
+      "cell_id": "ACELL0018",
+      "details": {
+        "cell_id": "ACELL0018",
+        "cell_ocv": 3.25,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": {
+        "anode_id": "AN220234",
+        "cathode_id": "CH202634"
+      }
+    },
+    {
+      "cell_id": "ACELL0019",
+      "details": {
+        "cell_id": "ACELL0019",
+        "cell_ocv": 3.3,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": {
+        "anode_id": "AN220774",
+        "cathode_id": "CH202774"
+      }
+    },
+    {
+      "cell_id": "ACELL0020",
+      "details": {
+        "cell_id": "ACELL0020",
+        "cell_ocv": 3.35,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": {
+        "anode_id": "AN220231",
+        "cathode_id": "CH202635"
+      }
+    },
+    {
+      "cell_id": "ACELL0021",
+      "details": {
+        "cell_id": "ACELL0021",
+        "cell_ocv": 3.4,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": "Cell_ID not found in electrode mapping DB!!"
+    },
+    {
+      "cell_id": "ACELL0022",
+      "details": {
+        "cell_id": "ACELL0022",
+        "cell_ocv": 3.45,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": "Cell_ID not found in electrode mapping DB!!"
+    },
+    {
+      "cell_id": "ACELL0023",
+      "details": {
+        "cell_id": "ACELL0023",
+        "cell_ocv": 3.5,
+        "cell_ir": 15523.6,
+        "cell_hrd": 0.0125,
+        "filling_datetime": "2025-05-19T00:54:53.000Z",
+        "dry_weight": null,
+        "filled_weight": null,
+        "jelly_roll_wt": null,
+        "jelly_roll_dia": null
+      },
+      "electrode_data": "Cell_ID not found in electrode mapping DB!!"
+    }
+  ]
+}
