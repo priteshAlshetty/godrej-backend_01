@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const { formatToLocal } = require('../utils/formatTimeStamps');
 const fs = require('fs');
 const { get } = require('http');
 const path = require('path');
@@ -80,7 +81,7 @@ function saveJsonToFile(jsonObj) {
 //                     );
 
 //                     const dataEntry = {
-                        
+
 //                         [`${key.split('_')[0]}_data`]:
 //                             rows.length > 0 ? rows[0] : `No data found for ${value}`,
 //                     };
@@ -122,13 +123,12 @@ function saveJsonToFile(jsonObj) {
 async function getTraceByBatteryId(battery_id) {
     const returnObject = {
         SUCCESS: true,
-        battery_id,
     };
 
     try {
         // 1. Get battery basic info
         const [batteryMain] = await db.query(
-            /*sql*/`SELECT battery_ocv, manufactured_timestamp 
+            /*sql*/ `SELECT battery_ocv, manufactured_timestamp 
             FROM battery_main 
             WHERE battery_id = ?`,
             [battery_id]
@@ -160,7 +160,9 @@ async function getTraceByBatteryId(battery_id) {
             const cell = { cell_id };
 
             // 3a. Fetch cell_main details
-            const [cellMain] = await db.query('SELECT * FROM cell_main WHERE cell_id = ?', [cell_id]);
+            const [cellMain] = await db.query('SELECT * FROM cell_main WHERE cell_id = ?', [
+                cell_id,
+            ]);
             cell.data = cellMain.length > 0 ? cellMain[0] : 'Cell_ID not found in DB!!';
 
             // 3b. Get electrode IDs (anode & cathode)
@@ -172,7 +174,9 @@ async function getTraceByBatteryId(battery_id) {
             const electrode_data = [];
 
             if (!electrodeMapping || electrodeMapping.length === 0) {
-                electrode_data.push({ error: `No electrode mapping found for cell_id: ${cell_id}` });
+                electrode_data.push({
+                    error: `No electrode mapping found for cell_id: ${cell_id}`,
+                });
             } else {
                 // 4. For each electrode ID (anode, cathode), get its detailed data
                 for (const [key, value] of Object.entries(electrodeMapping[0])) {
@@ -183,13 +187,12 @@ async function getTraceByBatteryId(battery_id) {
                         );
 
                         const dataEntry = {
-                            
                             [`${key.split('_')[0]}_data`]:
                                 rows.length > 0 ? rows[0] : `No data found for ${value}`,
                         };
 
                         electrode_data.push(dataEntry);
-                    } catch (err) {
+                    } catch (error) {
                         console.error(`Error querying electrode ${value} for ${key}:`, err);
                         electrode_data.push({
                             [key]: value,
@@ -204,8 +207,8 @@ async function getTraceByBatteryId(battery_id) {
         }
 
         returnObject.cell_data = cell_data;
+        returnObject.battery_id = battery_id;
         return returnObject;
-
     } catch (error) {
         console.error('Error in getTraceByBatteryId:', error);
 
@@ -213,13 +216,111 @@ async function getTraceByBatteryId(battery_id) {
             SUCCESS: false,
             battery_id,
             errMsg: error.message || 'Unknown error occurred',
-            location: 'getTraceByBatteryId',
+            location: 'getTraceByBatteryId controller function call ==> try-catch block',
+            stack: error.stack || null,
+            error: error,
+        };
+    }
+}
+
+async function getBatteryIdFromCellId(cell_id) {
+    try {
+        // 1. Get battery_id from cell_id
+        const values = Array(9).fill(cell_id); // same value for each placeholder
+        const query = `SELECT battery_id
+                        FROM battery_cell_mapping
+                        WHERE cell_id_1 = ?
+                        OR cell_id_2 = ?
+                        OR cell_id_3 = ?
+                        OR cell_id_4 = ?
+                        OR cell_id_5 = ?
+                        OR cell_id_6 = ?
+                        OR cell_id_7 = ?
+                        OR cell_id_8 = ?
+                        OR cell_id_9 = ?
+                        LIMIT 1`;
+
+        const [rows] = await db.query(query, values);
+
+        if (!rows || rows.length === 0) {
+            throw new Error(`No battery_id found for cell_id: ${cell_id}`);
+        }
+        battery_id = rows[0].battery_id;
+        return {
+            SUCCESS: true,
+            battery_id,
+        };
+    } catch (error) {
+        console.error('Error in getBatteryIdFromCellId:', error);
+
+        return {
+            SUCCESS: false,
+            cell_id,
+            errMsg: error.message || 'Unknown error occurred',
+            location: 'getBatteryIdFromCellId controller function call ==> try-catch block',
+            stack: error.stack || null,
+            error: error,
+            battery_id: null,
+        };
+    }
+}
+
+async function getTraceByCellId(cell_id) {
+    try {
+        const result = await getBatteryIdFromCellId(cell_id);
+        if (result && result.SUCCESS && result.battery_id != null && result.battery_id !== '') {
+            const returnObject = await getTraceByBatteryId(result.battery_id);
+            return returnObject;
+        } else if (result.battery_id === null) {
+            throw new Error(
+                'Error in getBatteryIdFromCellId ==> No battery_id found for cell_id:' + cell_id
+            );
+        } else {
+            throw new Error(
+                'Error in getBatteryIdFromCellId at call of getTraceByCellId ==> if-else block'
+            );
+        }
+    } catch (error) {
+        console.error('Error in getTraceByCellId:', error);
+        return {
+            SUCCESS: false,
+            cell_id,
+            errMsg: error.message || 'Unknown error occurred',
+            location: 'getTraceByCellId controller function call ==> try-catch block',
             stack: error.stack || null,
         };
     }
 }
 
+async function getDataBySingleBatchId(batch_id) {
+    try {
+        const [rows] = await db.query('SELECT * FROM batch_main WHERE batch_id = ?', [batch_id]);
+
+        if (!rows || rows.length === 0) {
+            throw new Error(`No data found for batch: ${batch_id}`);
+        } else {
+            const batchData = rows[0];
+            batchData.start_timestamp = formatToLocal(batchData.start_timestamp);
+            batchData.stop_timestamp = formatToLocal(batchData.stop_timestamp);
+            return {
+                SUCCESS: true,
+                batch_data: batchData,
+            };
+        }
+    } catch (error) {
+        console.error('Error in getDataBySingleBatchId:', error);
+        return {
+            SUCCESS: false,
+            batch_id,
+            errMsg: error.message || 'Unknown error occurred',
+            location: 'getDataBySingleBatchId controller function call ==> try-catch block',
+            stack: error.stack || null,
+        };
+    }
+}
 
 module.exports = {
     getTraceByBatteryId,
+    getTraceByCellId,
+    getDataBySingleBatchId,
 };
