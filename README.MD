@@ -22,21 +22,20 @@ This ensures detailed traceability from finished product to raw material sources
 ---
 
 ## 📁 Project Structure
-
-## 📁 Project Structure
-
+``` bash
 backend/
 ├── routes/ # Express routes (API endpoints)
-├── middleware/ 
-├── static/  (for static resources)
-├── controllers/ # Business logic 
-├── models/ 
-├── config/db.js # Database connection setup
+├── middleware/
+├── static/ # For static resources
+├── controllers/ # Business logic
+├── models/
+├── config/
+│       └── db.js # Database connection setup
 ├── utils/ # Utility functions (date time conversion etc.)
 ├── .env # Environment variables
 ├── package.json # Environment required modules info
-└── index.js.js # Main entry point
-
+└── index.js # Main entry point
+```
 ---
 
 ## 📦 Installation
@@ -54,7 +53,7 @@ backend/
 
 4. Create a .env file in the root of the backend directory.
 
-    Example:
+  - **Example:-**
 
     . env
     ```bash
