@@ -14,9 +14,10 @@ const targetPath = path.join(__dirname, '../uploads/end_of_line.xlsx'); //
 const folderPath = path.join(__dirname, '../uploads'); // replace with your folder path
 // Adjust as needed
 
-router.use(verifyTokenCookies);
+// router.use(verifyTokenCookies);
 
-router.post('/upload', upload.single('end_of_line'), async (req, res) => {
+router.post('/upload/end-of-line', upload.single('end_of_line'), async (req, res) => {
+    
     try {
         if (!req.file) {
             return res.status(400).json({ error: 'no file found to upload!!', STATUS: false });
@@ -73,7 +74,7 @@ router.post('/upload', upload.single('end_of_line'), async (req, res) => {
     }
 });
 
-router.post('/add_excel_to_server', async (req, res) => {
+router.post('/add-excel-to-server', async (req, res) => {
     if (req.body.authKEY === 'AUTH1123') {
         const result = await addDataToServer();
         console.log("here-->"+result);

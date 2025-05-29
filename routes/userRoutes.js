@@ -8,6 +8,7 @@ const AUTH_KEY = 1232;
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
+    console.log('username', 'password');
     const result = await checkUserCred(username, password);
 
     if (!result.STATUS) {
@@ -38,16 +39,7 @@ router.get('/', (req, res) => {
     res.send('Welcome to the Express MVC backend!');
 });
 
-// Protected Routes
-router.use(verifyTokenCookies);
 
-router.get('/profile', (req, res) => {
-    res.json({ message: 'Protected route', userId: req.user.userId });
-});
-
-router.get('/settings', (req, res) => {
-    res.json({ message: 'Settings data for user', userId: req.user.userId });
-});
 
 // Test DB connection
 router.get('/test-db-conn', async (req, res) => {
@@ -121,7 +113,7 @@ router.post('/signup/add-user', async (req, res) => {
             throw new Error('Wrong auth key: ' + authKey);
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
             success: false,
             errMsg: 'internal server error',

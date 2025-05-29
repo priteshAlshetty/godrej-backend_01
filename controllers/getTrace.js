@@ -123,14 +123,15 @@ function saveJsonToFile(jsonObj) {
 async function getTraceByBatteryId(battery_id) {
     const returnObject = {
         SUCCESS: true,
+        battery_id
     };
 
     try {
         // 1. Get battery basic info
         const [batteryMain] = await db.query(
-            /*sql*/ `SELECT battery_ocv, manufactured_timestamp 
-            FROM battery_main 
-            WHERE battery_id = ?`,
+            /*sql*/ `SELECT * 
+                FROM battery_main 
+                WHERE battery_id = ?`,
             [battery_id]
         );
 
@@ -319,8 +320,63 @@ async function getDataBySingleBatchId(batch_id) {
     }
 }
 
+async function getTraceFromElectrodeId(electrode_id) {
+    try {
+        const [rows] = await db.query(
+            'SELECT cell_id FROM cell_electrode_mapping WHERE anode_id= ? OR cathode_id = ? LIMIT 1',
+            [electrode_id, electrode_id]
+        );
+        if (!rows || rows.length === 0) {
+            throw new Error(`No cell_id found for electrode_id: ${electrode_id}`);
+        } else {
+            const cell_id = rows[0].cell_id;
+            const returnObject = await getTraceByCellId(cell_id);
+            return returnObject;
+        }
+    } catch (error) {
+        console.error('Error in getBatteryIdFromElectrodeId:', error);
+        return {
+            SUCCESS: false,
+            electrode_id,
+            errMsg: error.message || 'Unknown error occurred',
+            errorStack: error.stack || null,
+        };
+    }
+}
+
+async function getTraceByDate(date) {
+    try {
+        const objectList = [];
+        const [rows] = await db.query(
+            `SELECT battery_id 
+            FROM battery_main 
+            WHERE DATE(manufactured_timestamp) = ?`,
+            [date]
+        );
+        const battery_id_list = rows.map((row) => row.battery_id);
+        // console.log(battery_id_list);
+        for (const item of battery_id_list) {
+            const traceObject = await getTraceByBatteryId(item);
+            objectList.push(traceObject);
+        }
+        // console.log(objectList);
+        return {
+            SUCCESS: true,
+            objectList,
+        };
+    } catch (error) {
+        return {
+            SUCCESS: false,
+            error: error.message,
+            location: 'backend controller function call of getTraceByDate() ==> try-catch block',
+        };
+    }
+}
+
 module.exports = {
     getTraceByBatteryId,
     getTraceByCellId,
     getDataBySingleBatchId,
+    getTraceFromElectrodeId,
+    getTraceByDate,
 };
