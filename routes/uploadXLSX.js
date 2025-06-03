@@ -74,7 +74,7 @@ router.post('/upload/end-of-line', upload.single('end_of_line'), async (req, res
     }
 });
 
-router.post('/add-excel-to-server', async (req, res) => {
+router.post('/upload/add-excel-to-server', async (req, res) => {
     if (req.body.authKEY === 'AUTH1123') {
         const result = await addDataToServer();
         console.log("here-->"+result);

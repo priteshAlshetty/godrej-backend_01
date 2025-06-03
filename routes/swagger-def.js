@@ -1,7 +1,7 @@
 //api/test-db-conn:
 /**
  * @swagger
- * /test-db-conn:
+ * /api/test-db-conn:
  *   get:
  *     summary: Test database connection
  *     tags:  [Check Health]
@@ -32,7 +32,7 @@
 // api/get-all-user-list:
 /**
  * @swagger
- * /get-all-user-list:
+ * /api/get-all-user-list:
  *   post:
  *     summary: Get list of all users
  *     tags : [Users]
@@ -81,7 +81,7 @@
 // api/signup/add-user:
 /**
  * @swagger
- * /signup/add-user:
+ * /api/signup/add-user:
  *   post:
  *     summary: Add a new user (sign up)
  *     tags : [Users]
@@ -169,7 +169,7 @@
 // api/upload/end-of-line:
 /**
  * @swagger
- * /upload/end-of-line:
+ * /api/upload/end-of-line:
  *   post:
  *     summary: Upload an Excel file for end-of-line processing
  *     tags : [Uploads]
@@ -230,7 +230,7 @@
 // api/add_excel_to_server:
 /**
  * @swagger
- * /add-excel-to-server:
+ * api/upload/add-excel-to-server:
  *   post:
  *     summary: Process and add uploaded Excel data to the server
  *     tags : [Uploads]
@@ -290,7 +290,7 @@
 // api/trace/battery-id:
 /**
  * @swagger
- * /trace/battery-id:
+ * /api/trace/battery-id:
  *   post:
  *     summary: Get trace data by battery ID
  *     tags : [Trace]
@@ -367,7 +367,7 @@
 // api/trace/cell-id:
 /**
  * @swagger
- * /trace/cell-id:
+ * /api/trace/cell-id:
  *   post:
  *     summary: Get trace data by cell ID
  *     tags : [Trace]
@@ -444,7 +444,7 @@
 // api/trace/batch-id:
 /**
  * @swagger
- * /trace/batch-id:
+ * /api/trace/batch-id:
  *   post:
  *     summary: Get data by batch ID
  *     tags : [Trace]
@@ -513,7 +513,7 @@
 // api/trace/electrode-id:
 /**
  * @swagger
- * /trace/electrode-id:
+ * /api/trace/electrode-id:
  *   post:
  *     summary: Get trace data by electrode ID
  *     tags : [Trace]
@@ -569,7 +569,7 @@
 // api/trace/date:
 /**
  * @swagger
- * /trace/date:
+ * /api/trace/date:
  *   post:
  *     summary: Get trace list by date
  *     tags : [Trace]
