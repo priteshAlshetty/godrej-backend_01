@@ -17,7 +17,6 @@ const folderPath = path.join(__dirname, '../uploads'); // replace with your fold
 // router.use(verifyTokenCookies);
 
 router.post('/upload/end-of-line', upload.single('end_of_line'), async (req, res) => {
-    
     try {
         if (!req.file) {
             return res.status(400).json({ error: 'no file found to upload!!', STATUS: false });
@@ -69,19 +68,26 @@ router.post('/upload/end-of-line', upload.single('end_of_line'), async (req, res
                     .json({ error: 'Server error during file handling', STATUS: false });
             }
         }
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log('error at /upload/end-of-line ::', error.message);
+        res.status(500).json({
+            errMsg: 'Server error during file handling',
+            STATUS: false,
+            error: error.message,
+            errorStack: error.stack,
+            location: 'Error at api request /api/upload/end-of-line  ==>try catch block  ',
+        });
     }
 });
 
 router.post('/upload/add-excel-to-server', async (req, res) => {
     if (req.body.authKEY === 'AUTH1123') {
         const result = await addDataToServer();
-        console.log("here-->"+result);
+        console.log('here-->' + result);
         if (result) {
-            res.status(200).json({ 
-                STATUS: true, 
-                message: 'Data added successfully to server' 
+            res.status(200).json({
+                STATUS: true,
+                message: 'Data added successfully to server',
             });
         } else {
             res.status(400).json({
@@ -90,9 +96,41 @@ router.post('/upload/add-excel-to-server', async (req, res) => {
             });
         }
     } else {
-        res.status(500).json({ 
-            STATUS: false, 
-            message: 'Wrong Authkey' 
+        res.status(500).json({
+            STATUS: false,
+            message: 'Wrong Authkey',
+        });
+    }
+});
+
+router.post('/upload/end-of-line/json-form', async (req, res) => {
+    try {
+        const obj = req.body.battery_obj || null;
+        
+        if (!obj) {
+            return res.status(400).json({
+                success: false,
+                errMsg: 'missing required field :battery_obj ',
+            });
+        } else {
+            console.log('------------------End Of line Json Form------------------------');
+            console.log(obj);
+            console.log('------------------End Of line Json Form------------------------');
+            //TODO : write controller function call
+            return res.status(200).json({
+                success: true,
+                msg: 'json loaded in database successfully!!',
+            });
+        }
+    } catch (error) {
+        console.log('error at /upload/end-of-line/json-form::', error.message);
+        res.status(500).json({
+            errMsg: 'Server error during Json handling',
+            success: false,
+            error: error.message,
+            errorStack: error.stack,
+            location:
+                'Error at api request /api/upload/end-of-line/json-form  ==>try catch block  ',
         });
     }
 });

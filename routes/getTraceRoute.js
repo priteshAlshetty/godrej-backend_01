@@ -165,7 +165,13 @@ router.post('/trace/electrode-id', async(req,res) => {
         }
 
     }catch(error){
-
+        res.status(500).json({
+            errMsg : "Internal server error",
+            success:false,
+            error: error.message,
+            error_stack: error.stack,
+            location: "At api call /trace/electrode-id => try-catch block"
+        })
     }
 })
 

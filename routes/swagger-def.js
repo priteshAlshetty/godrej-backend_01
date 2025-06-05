@@ -227,7 +227,7 @@
  *                   example: false
  */
 
-// api/add_excel_to_server:
+// api/upload/add_excel_to_server:
 /**
  * @swagger
  * api/upload/add-excel-to-server:
@@ -286,6 +286,84 @@
  *                   type: string
  *                   example: Wrong Authkey
  */
+
+// api/upload/json-form
+/**
+ * @swagger
+ * /upload/end-of-line/json-form:
+ *   post:
+ *     summary: Upload end-of-line battery JSON data
+ *     description: Accepts and stores battery-related data from the end-of-line testing station. The input should be a structured JSON object under the key `battery_obj`.
+ *     tags:
+ *       - Uploads
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - battery_obj
+ *             properties:
+ *               battery_obj:
+ *                 type: object
+ *                 description: JSON object containing battery data from end-of-line station
+ *                 example:
+ *                   battery_id: "BAT123456"
+ *                   cell_ids: ["CELL1", "CELL2", "CELL3"]
+ *                   tested_on: "2025-06-03T12:00:00Z"
+ *                   tester_id: "EOL-UNIT-01"
+ *                   remarks: "Passed all tests"
+ *     responses:
+ *       200:
+ *         description: JSON processed and stored successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 msg:
+ *                   type: string
+ *                   example: "json loaded in database successfully!!"
+ *       400:
+ *         description: Required `battery_obj` field is missing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "missing required field :battery_obj"
+ *       500:
+ *         description: Server error during JSON processing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 STATUS:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Server error during Json handling"
+ *                 error:
+ *                   type: string
+ *                 errorStack:
+ *                   type: string
+ *                 location:
+ *                   type: string
+ *                   example: "Error at api request /api/upload/end-of-line/json-form  ==>try catch block"
+ */
+
+
 
 // api/trace/battery-id:
 /**
@@ -644,4 +722,322 @@
  *                 location:
  *                   type: string
  *                   example: At api call /trace/date => try-catch block
+ */
+
+// api/graph/cell-params/by-battery-id:
+/**
+ * @swagger
+ * /graph/cell-params/by-battery-id:
+ *   post:
+ *     summary: Retrieve cell parameters for a battery by battery ID
+ *     description: Fetches cell-level parameter data (OCV, IR, HRD, etc.) mapped to a specific battery ID for use in graph visualizations.
+ *     tags:
+ *       - Graph Data
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - battery_id
+ *             properties:
+ *               battery_id:
+ *                 type: string
+ *                 description: Unique identifier of the battery
+ *                 example: "BATT1234"
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved graph data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 graphData:
+ *                   type: object
+ *                   description: Graph data object returned from the database
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *       400:
+ *         description: Missing or invalid battery ID, or graph data not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Missing required field: Battery_id"
+ *                 location:
+ *                   type: string
+ *                   example: "At api call /graph/cell-params/by-battery-id => if-else block"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Internal server error"
+ *                 error:
+ *                   type: string
+ *                 error_stack:
+ *                   type: string
+ *                 location:
+ *                   type: string
+ *                   example: "At api call /graph/cell-params/by-battery-id => try-catch block"
+ */
+
+// api/graph/cell-params/by-testing-timestamp:
+/**
+ * @swagger
+ * /graph/cell-params/by-testing-timestamp:
+ *   post:
+ *     summary: Retrieve cell parameter data by testing timestamp range
+ *     description: Fetches graph-ready data for all cells tested between the given 'From' and 'To' timestamps.
+ *     tags:
+ *       - Graph Data
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - From
+ *               - To
+ *             properties:
+ *               From:
+ *                 type: string
+ *                 format: date-time
+ *                 description: Start timestamp of the testing window
+ *                 example: "2025-05-01T00:00:00Z"
+ *               To:
+ *                 type: string
+ *                 format: date-time
+ *                 description: End timestamp of the testing window
+ *                 example: "2025-05-02T23:59:59Z"
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved graph data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 graphData:
+ *                   type: object
+ *                   description: The data to be used in graphs
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *       400:
+ *         description: Invalid or missing timestamps, or no data found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Missing required field: From and To"
+ *                 location:
+ *                   type: string
+ *                   example: "At api call /graph/cell-params/by-testing-timestamp => if-else block"
+ *       500:
+ *         description: Internal server error during data retrieval
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Internal server error"
+ *                 error:
+ *                   type: string
+ *                 error_stack:
+ *                   type: string
+ *                 location:
+ *                   type: string
+ *                   example: "At api call /graph/cell-params/by-testing-timestamp => try-catch block"
+ */
+
+// api/graph/cell-params/by-filling-timestamp:
+/**
+ * @swagger
+ * /graph/cell-params/by-filling-timestamp:
+ *   post:
+ *     summary: Retrieve cell parameter data by filling timestamp range
+ *     description: Fetches cell-level parameter data (OCV, IR, HRD, etc.) for cells filled between the specified 'From' and 'To' timestamps. Useful for generating time-based production graphs.
+ *     tags:
+ *       - Graph Data
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - From
+ *               - To
+ *             properties:
+ *               From:
+ *                 type: string
+ *                 format: date-time
+ *                 description: Start timestamp for the filling operation
+ *                 example: "2025-05-01T00:00:00Z"
+ *               To:
+ *                 type: string
+ *                 format: date-time
+ *                 description: End timestamp for the filling operation
+ *                 example: "2025-05-02T23:59:59Z"
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved graph data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 graphData:
+ *                   type: object
+ *                   description: The data to be used in graph plotting
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *       400:
+ *         description: Missing or invalid timestamp fields, or no data found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Missing required field: From and To"
+ *                 location:
+ *                   type: string
+ *                   example: "At api call /graph/cell-params/by-filling-timestamp => if-else block"
+ *       500:
+ *         description: Internal server error during data retrieval
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Internal server error"
+ *                 error:
+ *                   type: string
+ *                 error_stack:
+ *                   type: string
+ *                 location:
+ *                   type: string
+ *                   example: "At api call /graph/cell-params/by-filling-timestamp => try-catch block"
+ */
+
+
+
+/**
+ * @swagger
+ * /download/generate-daily-report:
+ *   post:
+ *     summary: Generate and export daily battery report
+ *     tags:
+ *       - Reports
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - date
+ *             properties:
+ *               date:
+ *                 type: string
+ *                 format: date
+ *                 example: "2020-05-19"
+ *     responses:
+ *       200:
+ *         description: Daily report exported successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                 filePath:
+ *                   type: string
+ *       400:
+ *         description: Bad request (missing date or export failed)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 errMsg:
+ *                   type: string
+ *       500:
+ *         description: Internal server error
+ */
+
+
+/**
+ * @swagger
+ * /download/downloadReport:
+ *   get:
+ *     summary: Download the most recently generated daily report
+ *     tags:
+ *       - Reports
+ *     responses:
+ *       200:
+ *         description: XLSX report file download
+ *         content:
+ *           application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       404:
+ *         description: File not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 errMsg:
+ *                   type: string
+ *                   example: File not found
+ *       500:
+ *         description: Internal server error
  */

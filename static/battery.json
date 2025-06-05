@@ -1,69 +1,339 @@
 {
-    "battery_id": "BAT1233",
-    "battery_ocv": 3.25,
-    "manufactured_timestamp": "2025-05-19 01:30:00",
-    "cell_data":[
-        {
-        "cell_id": "ACELL015",
-        "testing_timestamp": "2025-05-19 01:30:00",
-        "cell_ocv" : "3.25 ",
-        "cell_ir" : "1.25" ,
-        "cell_hrd" : "2.1" ,
-        "filling_timestamp" : "2025-05-20 01:30:00",
-        "dry_wt": 26.5,
-        "filled_wt": 27.6,
-        "jelly_roll_dia": 17,
-        "jelly_roll_wt":45.2,
-        "electrod_id": [ 
+    "trace": {
+        "battery_id": "BAT1233",
+        "battery_ocv": "3.25",
+        "manufactured_timestamp": "2020-05-18T19:30:00.000Z",
+        "cell_data": [
             {
-                "type":"ANODE",
-                "weight": 45.2,
-                "moisture" : 50,
-                "thickness": 2,
-                "density":73,
-                "IR_temp_1":25.2,
-                "IR_temp_2":26.3,
-                "zone_temp_1":18.2,
-                "zone_temp_2":19.3,
-                "humidity": 10
+                "cell_id": "ACELL0015",
+                "data": {
+                    "cell_id": "ACELL0015",
+                    "cell_ocv": 3.1,
+                    "cell_ir": 15523.6,
+                    "cell_hrd": 0.0125,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 25,
+                    "filled_weight": 86,
+                    "jelly_roll_wt": 44.3,
+                    "jelly_roll_dia": 5,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "anode_data": {
+                            "electrode_id": "AN220236",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    },
+                    {
+                        "cathode_data": {
+                            "electrode_id": "CH202631",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    }
+                ]
             },
             {
-                "type":"CATHODE",
-                "wt": 45.2,
-                "weight": 45.2,
-                "moisture" : 50,
-                "thickness": 2,
-                "density":73,
-                "IR_temp_1":25.2,
-                "IR_temp_2":26.3,
-                "zone_temp_1":18.2,
-                "zone_temp_2":19.3,
-                "humidity": 10
+                "cell_id": "ACELL0016",
+                "data": {
+                    "cell_id": "ACELL0016",
+                    "cell_ocv": 3.15,
+                    "cell_ir": 15520,
+                    "cell_hrd": 0.0126,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 22,
+                    "filled_weight": 75,
+                    "jelly_roll_wt": 48.9,
+                    "jelly_roll_dia": 1,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "anode_data": {
+                            "electrode_id": "AN220234",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    },
+                    {
+                        "cathode_data": {
+                            "electrode_id": "CH202634",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    }
+                ]
+            },
+            {
+                "cell_id": "ACELL0017",
+                "data": {
+                    "cell_id": "ACELL0017",
+                    "cell_ocv": 3.2,
+                    "cell_ir": 15650,
+                    "cell_hrd": 0.0125,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 21,
+                    "filled_weight": 71,
+                    "jelly_roll_wt": 40.5,
+                    "jelly_roll_dia": 6,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "anode_data": {
+                            "electrode_id": "AN220235",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    },
+                    {
+                        "cathode_data": {
+                            "electrode_id": "CH202635",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    }
+                ]
+            },
+            {
+                "cell_id": "ACELL0018",
+                "data": {
+                    "cell_id": "ACELL0018",
+                    "cell_ocv": 3.25,
+                    "cell_ir": 15589,
+                    "cell_hrd": 0.0125,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 29,
+                    "filled_weight": 91,
+                    "jelly_roll_wt": 45.3,
+                    "jelly_roll_dia": 5,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "anode_data": {
+                            "electrode_id": "AN220234",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    },
+                    {
+                        "cathode_data": {
+                            "electrode_id": "CH202634",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    }
+                ]
+            },
+            {
+                "cell_id": "ACELL0019",
+                "data": {
+                    "cell_id": "ACELL0019",
+                    "cell_ocv": 3.3,
+                    "cell_ir": 15500,
+                    "cell_hrd": 0.013,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 28,
+                    "filled_weight": 92,
+                    "jelly_roll_wt": 40,
+                    "jelly_roll_dia": 7,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "anode_data": {
+                            "electrode_id": "AN220774",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    },
+                    {
+                        "cathode_data": "No data found for CH202774"
+                    }
+                ]
+            },
+            {
+                "cell_id": "ACELL0020",
+                "data": {
+                    "cell_id": "ACELL0020",
+                    "cell_ocv": 3.35,
+                    "cell_ir": 15485,
+                    "cell_hrd": 0.0186,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 27,
+                    "filled_weight": 86,
+                    "jelly_roll_wt": 47.3,
+                    "jelly_roll_dia": 8,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "anode_data": {
+                            "electrode_id": "AN220231",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    },
+                    {
+                        "cathode_data": {
+                            "electrode_id": "CH202635",
+                            "weight": 45.2,
+                            "moisture": 4.5,
+                            "thickness": 7,
+                            "density": 45.36,
+                            "IR_temp_1": 44.2,
+                            "IR_Temp_2": 485.36,
+                            "chain_speed": 45.56,
+                            "zone_temp_1": 47.3,
+                            "zone_temp_2": 5,
+                            "humidity": 7
+                        }
+                    }
+                ]
+            },
+            {
+                "cell_id": "ACELL0021",
+                "data": {
+                    "cell_id": "ACELL0021",
+                    "cell_ocv": 3.4,
+                    "cell_ir": 15402,
+                    "cell_hrd": 0.0175,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 20,
+                    "filled_weight": 85,
+                    "jelly_roll_wt": 49.3,
+                    "jelly_roll_dia": 9,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "error": "No electrode mapping found for cell_id: ACELL0021"
+                    }
+                ]
+            },
+            {
+                "cell_id": "ACELL0022",
+                "data": {
+                    "cell_id": "ACELL0022",
+                    "cell_ocv": 3.45,
+                    "cell_ir": 15569,
+                    "cell_hrd": 0.012,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 21,
+                    "filled_weight": 88,
+                    "jelly_roll_wt": 45.8,
+                    "jelly_roll_dia": 5,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "error": "No electrode mapping found for cell_id: ACELL0022"
+                    }
+                ]
+            },
+            {
+                "cell_id": "ACELL0023",
+                "data": {
+                    "cell_id": "ACELL0023",
+                    "cell_ocv": 3.5,
+                    "cell_ir": 15529,
+                    "cell_hrd": 0.0201,
+                    "filling_datetime": "2025-05-19T00:54:53.000Z",
+                    "dry_weight": 29,
+                    "filled_weight": 86,
+                    "jelly_roll_wt": 45.4,
+                    "jelly_roll_dia": 7,
+                    "testing_timestamp": "2025-05-28T08:50:50.000Z"
+                },
+                "electrode_data": [
+                    {
+                        "error": "No electrode mapping found for cell_id: ACELL0023"
+                    }
+                ]
             }
         ]
-    },
-    {
-        "cell_id": "ACELL016",
-        "testing_timestamp": "2025-05-19 01:30:00",
-        "cell_ocv" : "3.25 ",
-        "cell_ir" : "1.25" ,
-        "cell_hrd" : "2.1" ,
-        "filling_timestamp" : "2025-05-20 01:30:00",
-        "dry_wt": 26.5,
-        "filled_wt": 27.6,
-        "jelly_roll_dia": 17,
-        "jelly_roll_wt":45.2
-    },
-    {
-        "cell_id": "ACELL017",
-        "testing_timestamp": "2025-05-19 01:30:00",
-        "cell_ocv" : "3.25 ",
-        "cell_ir" : "1.25" ,
-        "cell_hrd" : "2.1" ,
-        "filling_timestamp" : "2025-05-20 01:30:00",
-        "dry_wt": 26.5,
-        "filled_wt": 27.6,
-        "jelly_roll_dia": 17,
-        "jelly_roll_wt":45.2}
-    ]
+    }
 }
