@@ -230,7 +230,7 @@
 // api/upload/add_excel_to_server:
 /**
  * @swagger
- * api/upload/add-excel-to-server:
+ * /api/upload/add-excel-to-server:
  *   post:
  *     summary: Process and add uploaded Excel data to the server
  *     tags : [Uploads]
@@ -290,7 +290,7 @@
 // api/upload/json-form
 /**
  * @swagger
- * /upload/end-of-line/json-form:
+ * /api/upload/end-of-line/json-form:
  *   post:
  *     summary: Upload end-of-line battery JSON data
  *     description: Accepts and stores battery-related data from the end-of-line testing station. The input should be a structured JSON object under the key `battery_obj`.
@@ -727,7 +727,7 @@
 // api/graph/cell-params/by-battery-id:
 /**
  * @swagger
- * /graph/cell-params/by-battery-id:
+ * /api/graph/cell-params/by-battery-id:
  *   post:
  *     summary: Retrieve cell parameters for a battery by battery ID
  *     description: Fetches cell-level parameter data (OCV, IR, HRD, etc.) mapped to a specific battery ID for use in graph visualizations.
@@ -801,7 +801,7 @@
 // api/graph/cell-params/by-testing-timestamp:
 /**
  * @swagger
- * /graph/cell-params/by-testing-timestamp:
+ * /api/graph/cell-params/by-testing-timestamp:
  *   post:
  *     summary: Retrieve cell parameter data by testing timestamp range
  *     description: Fetches graph-ready data for all cells tested between the given 'From' and 'To' timestamps.
@@ -821,12 +821,12 @@
  *                 type: string
  *                 format: date-time
  *                 description: Start timestamp of the testing window
- *                 example: "2025-05-01T00:00:00Z"
+ *                 example: "2025-05-01"
  *               To:
  *                 type: string
  *                 format: date-time
  *                 description: End timestamp of the testing window
- *                 example: "2025-05-02T23:59:59Z"
+ *                 example: "2025-05-02"
  *     responses:
  *       200:
  *         description: Successfully retrieved graph data
@@ -882,7 +882,7 @@
 // api/graph/cell-params/by-filling-timestamp:
 /**
  * @swagger
- * /graph/cell-params/by-filling-timestamp:
+ * /api/graph/cell-params/by-filling-timestamp:
  *   post:
  *     summary: Retrieve cell parameter data by filling timestamp range
  *     description: Fetches cell-level parameter data (OCV, IR, HRD, etc.) for cells filled between the specified 'From' and 'To' timestamps. Useful for generating time-based production graphs.
@@ -902,12 +902,12 @@
  *                 type: string
  *                 format: date-time
  *                 description: Start timestamp for the filling operation
- *                 example: "2025-05-01T00:00:00Z"
+ *                 example: "2025-05-01"
  *               To:
  *                 type: string
  *                 format: date-time
  *                 description: End timestamp for the filling operation
- *                 example: "2025-05-02T23:59:59Z"
+ *                 example: "2025-05-02"
  *     responses:
  *       200:
  *         description: Successfully retrieved graph data
@@ -961,10 +961,10 @@
  */
 
 
-
+// api/download
 /**
  * @swagger
- * /download/generate-daily-report:
+ * /api/download/generate-daily-report:
  *   post:
  *     summary: Generate and export daily battery report
  *     tags:
@@ -1012,10 +1012,10 @@
  *         description: Internal server error
  */
 
-
+// api/download
 /**
  * @swagger
- * /download/downloadReport:
+ * /api/download/downloadReport:
  *   get:
  *     summary: Download the most recently generated daily report
  *     tags:

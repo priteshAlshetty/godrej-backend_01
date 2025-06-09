@@ -81,6 +81,7 @@ async function getGraphByTestingDate(from, to) {
 
         horizontal_axis: {
             cell_id_list: [],
+            cell_timestamp:[]
         },
         vertial_axis_dataPoints: {
             cell_ocv: [],
@@ -105,9 +106,11 @@ async function getGraphByTestingDate(from, to) {
             } else {
                 for (const row of rows) {
                     const v = returnObject.vertial_axis_dataPoints;
-                    const cell = returnObject.horizontal_axis.cell_id_list;
+                    const cell = returnObject.horizontal_axis;
 
-                    cell.push(row.cell_id);
+                    cell.cell_id_list.push(row.cell_id);
+                    let testing =  new Date(row.testing_timestamp).toLocaleString();
+                    cell.cell_timestamp.push(testing ?? null);
                     v.cell_ocv.push(row.cell_ocv ?? null);
                     v.cell_ir.push(row.cell_ir ?? null);
                     v.cell_hrd.push(row.cell_hrd ?? null);
@@ -139,6 +142,7 @@ async function getGraphByFillingDate(from, to) {
 
         horizontal_axis: {
             cell_id_list: [],
+            cell_timestamp:[]
         },
         vertial_axis_dataPoints: {
             cell_ocv: [],
@@ -163,9 +167,11 @@ async function getGraphByFillingDate(from, to) {
             } else {
                 for (const row of rows) {
                     const v = returnObject.vertial_axis_dataPoints;
-                    const cell = returnObject.horizontal_axis.cell_id_list;
+                    const cell = returnObject.horizontal_axis;
 
-                    cell.push(row.cell_id);
+                    cell.cell_id_list.push(row.cell_id);
+                    let filling =  new Date(row.filling_datetime).toLocaleString();
+                    cell.cell_timestamp.push(filling ?? null);
                     v.cell_ocv.push(row.cell_ocv ?? null);
                     v.cell_ir.push(row.cell_ir ?? null);
                     v.cell_hrd.push(row.cell_hrd ?? null);
