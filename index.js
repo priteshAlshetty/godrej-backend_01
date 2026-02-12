@@ -24,6 +24,7 @@ const uploadXLSX = require('./routes/uploadXLSX');
 const getTrace = require('./routes/getTraceRoute');
 const getGraphs = require('./routes/getGraphRoutes');
 const getDailyReports = require('./routes/excelReports');
+const getMachineData = require('./routes/getMachineDataRoute');
 
 const logger = require('./middleware/logger');
 const db = require('./config/db');
@@ -40,6 +41,7 @@ app.use('/api', uploadXLSX);
 app.use('/api', getTrace);
 app.use('/api', getGraphs);
 app.use('/api', getDailyReports);
+app.use('/api', getMachineData);
 
 // Start server
 app.listen(port, '0.0.0.0', () => {
