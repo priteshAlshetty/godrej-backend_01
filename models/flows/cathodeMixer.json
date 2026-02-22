@@ -1,0 +1,890 @@
+[
+    {
+        "id": "37ccf0e434c9154b",
+        "type": "tab",
+        "label": "Cathode_mixer_new",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f87105ef6b0bd6be",
+        "type": "OpcUa-Client",
+        "z": "37ccf0e434c9154b",
+        "endpoint": "dbd7fef3152637b7",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "5",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "Cathode_Mixer 133:4850",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "7246acb6d593dd7c"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "90814a41377e6d52",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=34",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "stop_bit",
+        "x": 260,
+        "y": 260,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "7246acb6d593dd7c",
+        "type": "switch",
+        "z": "37ccf0e434c9154b",
+        "name": "",
+        "property": "browseName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "batch_id",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "start_bit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "stop_bit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "mixing_time",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "paste_temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "max_current",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "max_torque",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "batch_size",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "paste_moisture",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "paste_density",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "penetration",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "data_log_bit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "bismuth_sp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "bismuth_eventlog",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 14,
+        "x": 690,
+        "y": 360,
+        "wires": [
+            [
+                "2662b066e501d0d5"
+            ],
+            [
+                "35291bb0121b2429"
+            ],
+            [
+                "26c9fd5fae31de32"
+            ],
+            [
+                "052f945cb6034ce1"
+            ],
+            [
+                "7e78d68f788a8042"
+            ],
+            [
+                "c2f3ca0272cfeca6"
+            ],
+            [
+                "37edc17475c610ab"
+            ],
+            [
+                "975e3a0aa975427a"
+            ],
+            [
+                "7668cd7bef19be0d"
+            ],
+            [
+                "d9a9c7cb56d4c597"
+            ],
+            [
+                "abc1292bae870980"
+            ],
+            [
+                "77597515b0546341"
+            ],
+            [
+                "84d3bf875de41e64"
+            ],
+            [
+                "b1d3e54832de7991"
+            ]
+        ]
+    },
+    {
+        "id": "83d1cba80a3887e5",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=9",
+        "datatype": "Float",
+        "value": "",
+        "name": "paste_temp",
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "5550eea3bde0bc4e",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=3",
+        "datatype": "String",
+        "value": "",
+        "name": "batch_id",
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "7356850cf6cf7459",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=33",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "start_bit",
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "5e042c044e8ee5b3",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=",
+        "datatype": "Float",
+        "value": "",
+        "name": "mixing_time",
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "f9b6c39f93356d1f",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=7",
+        "datatype": "Int16",
+        "value": "",
+        "name": "max_torque",
+        "x": 270,
+        "y": 420,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "870da232114b54ac",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=5",
+        "datatype": "Float",
+        "value": "",
+        "name": "max_current",
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "41dd89a95488d562",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=",
+        "datatype": "Float",
+        "value": "",
+        "name": "batch_size",
+        "x": 270,
+        "y": 460,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "9cc512054ec9304b",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=35",
+        "datatype": "Float",
+        "value": "",
+        "name": "paste_density",
+        "x": 280,
+        "y": 540,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "03bf998e5e99fc57",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=36",
+        "datatype": "Float",
+        "value": "",
+        "name": "paste_moisture",
+        "x": 280,
+        "y": 500,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "d2fc35fabbc254ef",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=37",
+        "datatype": "Float",
+        "value": "",
+        "name": "penetration",
+        "x": 270,
+        "y": 580,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "f10b5225bbd59c05",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=27",
+        "datatype": "Int16",
+        "value": "",
+        "name": "data_log_bit",
+        "x": 270,
+        "y": 620,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "2662b066e501d0d5",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "batch_id",
+        "func": "const batch_id = msg.payload;\nflow.set(\"id\", batch_id)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 100,
+        "wires": [
+            [
+                "159ffb7d1460078e"
+            ]
+        ]
+    },
+    {
+        "id": "35291bb0121b2429",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "start_time_log",
+        "func": "\n\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let batch_id = flow.get(\"id\");\n\n    let sql = `INSERT INTO batch_main (batch_id, start_timestamp)\n        VALUES (?, NOW())\n        `;\n\n    msg.topic = sql;\n    msg.payload = [batch_id];\n\n\n    return msg;\n\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 140,
+        "wires": [
+            [
+                "78352387cba2f1d4"
+            ]
+        ]
+    },
+    {
+        "id": "26c9fd5fae31de32",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "stop_time_log",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let batch_id = flow.get(\"id\")\n\n    let sql = `INSERT IGNORE INTO batch_main (batch_id, stop_timestamp)\n        VALUES (?, NOW())\n        ON DUPLICATE KEY UPDATE\n         stop_timestamp = NOW()\n        `;\n\n    msg.topic = sql;\n    msg.payload = [batch_id]\n\n    return msg;\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 180,
+        "wires": [
+            [
+                "78352387cba2f1d4"
+            ]
+        ]
+    },
+    {
+        "id": "c2f3ca0272cfeca6",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "max_current",
+        "func": "flow.set(\"max_cur\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7e78d68f788a8042",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "paste_tmeprature",
+        "func": "flow.set(\"paste_temp\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "052f945cb6034ce1",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "mixing_time",
+        "func": "flow.set(\"mx_time\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d9a9c7cb56d4c597",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "paste_density",
+        "func": "flow.set(\"paste_den\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "975e3a0aa975427a",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "batch_size",
+        "func": "flow.set(\"batch_size\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "37edc17475c610ab",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "max_torque",
+        "func": "flow.set(\"max_torque\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7668cd7bef19be0d",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "paste_moisture",
+        "func": "flow.set(\"paste_mois\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "abc1292bae870980",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "penetration",
+        "func": "flow.set(\"pene\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "77597515b0546341",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "data_log_query",
+        "func": "let batch_id = flow.get(\"id\");\nlet mx_time = flow.get(\"mx_time\");\nlet paste_temp = flow.get(\"paste_temp\");\nlet max_current = flow.get(\"max_cur\");\nlet max_torque = flow.get(\"max_torque\");\nlet batch_size = flow.get(\"batch_size\");\nlet paste_mois = flow.get(\"paste_mois\");\nlet paste_den = flow.get(\"paste_den\");\nlet penetration = flow.get(\"pene\");\nlet ambient_temp = flow.get(\"ambient_temp\");\nlet humidity = flow.get(\"humidity\");   // fixed spelling\n\nlet sql = `\nINSERT INTO batch_main \n(batch_id, mixing_time, ambient_temp, Humidity, final_paste_temp, \n max_current, max_torque, batch_size, paste_moisture, paste_density, penetration)\nVALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\nON DUPLICATE KEY UPDATE\n    mixing_time      = VALUES(mixing_time),\n    ambient_temp     = VALUES(ambient_temp),\n    Humidity         = VALUES(Humidity),\n    final_paste_temp = VALUES(final_paste_temp),\n    max_current      = VALUES(max_current),\n    max_torque       = VALUES(max_torque),\n    batch_size       = VALUES(batch_size),\n    paste_moisture   = VALUES(paste_moisture),\n    paste_density    = VALUES(paste_density),\n    penetration      = VALUES(penetration);\n`;\n\nmsg.topic = sql;\nmsg.payload = [\n    batch_id,\n    mx_time,\n    ambient_temp,\n    humidity,\n    paste_temp,\n    max_current,\n    max_torque,\n    batch_size,\n    paste_mois,\n    paste_den,\n    penetration\n];\n\nconsole.log(msg.payload);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 540,
+        "wires": [
+            [
+                "78352387cba2f1d4"
+            ]
+        ]
+    },
+    {
+        "id": "9accf3e6fc5f5341",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=39",
+        "datatype": "Int16",
+        "value": "",
+        "name": "bismuth_sp",
+        "x": 270,
+        "y": 660,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "699d507454a7bec3",
+        "type": "OpcUa-Item",
+        "z": "37ccf0e434c9154b",
+        "item": "ns=4;i=24",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "bismuth_eventlog",
+        "x": 290,
+        "y": 700,
+        "wires": [
+            [
+                "f87105ef6b0bd6be"
+            ]
+        ]
+    },
+    {
+        "id": "b1d3e54832de7991",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "bismuth_log",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let batch_id = flow.get(\"id\");\n    let bismuth_c_val = flow.get(\"bismuth_c\");\n\n    if (!batch_id) {\n        node.warn(\"batch_id missing — not logging bismuth_c\");\n        return null;\n    }\n\n    let sql = `\nINSERT INTO batch_main (batch_id, bismuth)\nVALUES (?, ?)\nON DUPLICATE KEY UPDATE\nbismuth = VALUES(bismuth);\n`;\n\n    msg.topic = sql;\n    msg.payload = [batch_id, bismuth_c_val];\n\n    return msg;        // send to MySQL\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 620,
+        "wires": [
+            [
+                "78352387cba2f1d4"
+            ]
+        ]
+    },
+    {
+        "id": "84d3bf875de41e64",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "bismuth",
+        "func": "flow.set(\"bismuth_c\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b5fbd5e4040a5d4d",
+        "type": "link in",
+        "z": "37ccf0e434c9154b",
+        "name": "link in 3",
+        "links": [
+            "e7491214d1765c3e"
+        ],
+        "x": 355,
+        "y": 60,
+        "wires": [
+            [
+                "54779aafdbf381d0"
+            ]
+        ]
+    },
+    {
+        "id": "9feae38ddd48e2f4",
+        "type": "link in",
+        "z": "37ccf0e434c9154b",
+        "name": "link in 4",
+        "links": [
+            "330ef49766b10ff9"
+        ],
+        "x": 355,
+        "y": 100,
+        "wires": [
+            [
+                "abeb1e1381b6a79a"
+            ]
+        ]
+    },
+    {
+        "id": "54779aafdbf381d0",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "ambient_temp",
+        "func": "flow.set(\"ambient_temp\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 60,
+        "wires": [
+            [
+                "c34c2d844970ab1a"
+            ]
+        ]
+    },
+    {
+        "id": "abeb1e1381b6a79a",
+        "type": "function",
+        "z": "37ccf0e434c9154b",
+        "name": "humidity",
+        "func": "flow.set(\"humidity\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "cf7db099218e44cc"
+            ]
+        ]
+    },
+    {
+        "id": "78352387cba2f1d4",
+        "type": "mysql",
+        "z": "37ccf0e434c9154b",
+        "mydb": "b3f91275fa8851ae",
+        "name": "batch_main",
+        "x": 1190,
+        "y": 340,
+        "wires": [
+            [
+                "adad0142a3f23c94"
+            ]
+        ]
+    },
+    {
+        "id": "adad0142a3f23c94",
+        "type": "debug",
+        "z": "37ccf0e434c9154b",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "559513f34f907838",
+        "type": "comment",
+        "z": "37ccf0e434c9154b",
+        "name": "manual tested",
+        "info": "",
+        "x": 1110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "159ffb7d1460078e",
+        "type": "link out",
+        "z": "37ccf0e434c9154b",
+        "name": "cathode_batch_id",
+        "mode": "link",
+        "links": [
+            "ab4e8d0c2178d91d",
+            "80cd456cdda9b1a7"
+        ],
+        "x": 1045,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c34c2d844970ab1a",
+        "type": "debug",
+        "z": "37ccf0e434c9154b",
+        "name": "debug 22",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "cf7db099218e44cc",
+        "type": "debug",
+        "z": "37ccf0e434c9154b",
+        "name": "debug 24",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "dd016ebd262ad92c",
+        "type": "inject",
+        "z": "37ccf0e434c9154b",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 70,
+        "y": 440,
+        "wires": [
+            [
+                "5550eea3bde0bc4e",
+                "7356850cf6cf7459",
+                "90814a41377e6d52",
+                "5e042c044e8ee5b3",
+                "83d1cba80a3887e5",
+                "870da232114b54ac",
+                "f9b6c39f93356d1f",
+                "41dd89a95488d562",
+                "03bf998e5e99fc57",
+                "9cc512054ec9304b",
+                "d2fc35fabbc254ef",
+                "f10b5225bbd59c05",
+                "9accf3e6fc5f5341",
+                "699d507454a7bec3"
+            ]
+        ]
+    },
+    {
+        "id": "ba119736afad2808",
+        "type": "comment",
+        "z": "37ccf0e434c9154b",
+        "name": "LATEST TEST",
+        "info": "",
+        "x": 840,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "dbd7fef3152637b7",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.18.16.133:4850",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "b3f91275fa8851ae",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "godrej_traceability",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "a435afa59173778c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-opcua": "0.2.340",
+            "node-red-node-mysql": "3.0.0"
+        }
+    }
+]

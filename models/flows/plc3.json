@@ -1,0 +1,1198 @@
+[
+    {
+        "id": "a21af4801b6d03ca",
+        "type": "tab",
+        "label": "PLC-3 new",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d3155bad6ce8c79b",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=458",
+        "datatype": "String",
+        "value": "",
+        "name": "cell_id",
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "2e0b04f54651b780",
+        "type": "OpcUa-Client",
+        "z": "a21af4801b6d03ca",
+        "endpoint": "26025b25e5605374",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "PLC-3 35:4858",
+        "x": 600,
+        "y": 640,
+        "wires": [
+            [
+                "60fd8bca26726c22"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "60fd8bca26726c22",
+        "type": "switch",
+        "z": "a21af4801b6d03ca",
+        "name": "",
+        "property": "browseName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "cell_id",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "dry_weight",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "filled_weight",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "datalog",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "battery_id",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell4",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell5",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell6",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell7",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell8",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell9",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cell10",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "GUN_data_log",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 16,
+        "x": 730,
+        "y": 400,
+        "wires": [
+            [
+                "525d24bb5ca8eeb4"
+            ],
+            [
+                "596dd1f91dea2021"
+            ],
+            [
+                "d879466955c3ad95"
+            ],
+            [
+                "b37701bf4fa5bfe1",
+                "108e11080ea5f446",
+                "a154ac5bf0e732ba"
+            ],
+            [
+                "0f4ead82476104e5"
+            ],
+            [
+                "31abcfaef4489982"
+            ],
+            [
+                "e97c12d7479f71bc"
+            ],
+            [
+                "1ac82f6c35e3ab87"
+            ],
+            [
+                "bb33f3baf5a30b4f"
+            ],
+            [
+                "8b7c110d01405f14"
+            ],
+            [
+                "2da16916fecaf9ba"
+            ],
+            [
+                "cca506c817c6fda3"
+            ],
+            [
+                "bb3dddf4ff070f37"
+            ],
+            [
+                "41c1755a050f0a40"
+            ],
+            [
+                "9431bdf3d1e3b0ca"
+            ],
+            [
+                "df657b5ee7aa6e1e",
+                "b0169104d929ca28"
+            ]
+        ]
+    },
+    {
+        "id": "596dd1f91dea2021",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "dry_weight",
+        "func": "flow.set(\"dry_weight\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ddbc58faa4b8345",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=461",
+        "datatype": "Float",
+        "value": "",
+        "name": "filled_weight",
+        "x": 370,
+        "y": 500,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "63488efdca623de0",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=459",
+        "datatype": "Float",
+        "value": "",
+        "name": "dry_weight",
+        "x": 370,
+        "y": 440,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "f21571420a75a4c7",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=457",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "datalog",
+        "x": 360,
+        "y": 540,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "d879466955c3ad95",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "filled_weight",
+        "func": "flow.set(\"filled_weight\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "525d24bb5ca8eeb4",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell_id",
+        "func": "flow.set(\"cell_id\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "45200a0c4ccea672",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=465",
+        "datatype": "String",
+        "value": "",
+        "name": "battery_id",
+        "x": 360,
+        "y": 580,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "f625eeb874d434ed",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=466",
+        "datatype": "String",
+        "value": "",
+        "name": "cell1",
+        "x": 350,
+        "y": 620,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "5fd6d602f159b223",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=475",
+        "datatype": "String",
+        "value": "",
+        "name": "cell10",
+        "x": 350,
+        "y": 980,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "1c3465bfc95323dd",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=474",
+        "datatype": "String",
+        "value": "",
+        "name": "cell9",
+        "x": 350,
+        "y": 940,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "c778116ad9199965",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=473",
+        "datatype": "String",
+        "value": "",
+        "name": "cell8",
+        "x": 350,
+        "y": 900,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "e701758f2269f053",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=472",
+        "datatype": "String",
+        "value": "",
+        "name": "cell7",
+        "x": 350,
+        "y": 860,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "2e4578ef6ba47728",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=471",
+        "datatype": "String",
+        "value": "",
+        "name": "cell6",
+        "x": 350,
+        "y": 820,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "a12bd0dbbc9a769e",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=470",
+        "datatype": "String",
+        "value": "",
+        "name": "cell5",
+        "x": 350,
+        "y": 780,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "703c8e66c16b5944",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=469",
+        "datatype": "String",
+        "value": "",
+        "name": "cell4",
+        "x": 350,
+        "y": 740,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "e8c1b105b9e8ccec",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=468",
+        "datatype": "String",
+        "value": "",
+        "name": "cell3",
+        "x": 350,
+        "y": 700,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "a8a4f041db0d0a3e",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=467",
+        "datatype": "String",
+        "value": "",
+        "name": "cell2",
+        "x": 350,
+        "y": 660,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "a7dcecae5a2a166d",
+        "type": "OpcUa-Item",
+        "z": "a21af4801b6d03ca",
+        "item": "ns=4;i=455",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "GUN_data_log",
+        "x": 380,
+        "y": 1020,
+        "wires": [
+            [
+                "2e0b04f54651b780"
+            ]
+        ]
+    },
+    {
+        "id": "0f4ead82476104e5",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "battery_id",
+        "func": "flow.set(\"battery_id\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "31abcfaef4489982",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell1",
+        "func": "flow.set(\"cell1\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e97c12d7479f71bc",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell2",
+        "func": "flow.set(\"cell2\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "41c1755a050f0a40",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell9",
+        "func": "flow.set(\"cell9\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb3dddf4ff070f37",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell8",
+        "func": "flow.set(\"cell8\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cca506c817c6fda3",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell7",
+        "func": "flow.set(\"cell7\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2da16916fecaf9ba",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell6",
+        "func": "flow.set(\"cell6\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8b7c110d01405f14",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell5",
+        "func": "flow.set(\"cell5\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb33f3baf5a30b4f",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell4",
+        "func": "flow.set(\"cell4\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ac82f6c35e3ab87",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell3",
+        "func": "flow.set(\"cell3\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9431bdf3d1e3b0ca",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "cell10",
+        "func": "flow.set(\"cell10\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "df657b5ee7aa6e1e",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "battery_cell_mapping query",
+        "func": "\n\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n\n    // Read values from flow context\n    let battery_id = flow.get(\"battery_id\");\n    let c1 = flow.get(\"cell1\");\n    let c2 = flow.get(\"cell2\");\n    let c3 = flow.get(\"cell3\");\n    let c4 = flow.get(\"cell4\");\n    let c5 = flow.get(\"cell5\");\n    let c6 = flow.get(\"cell6\");\n    let c7 = flow.get(\"cell7\");\n    let c8 = flow.get(\"cell8\");\n    let c9 = flow.get(\"cell9\");\n    let c10 = flow.get(\"cell10\");\n\n    // ---- SQL QUERY (CORRECTED) ----\n    let sql = `\n        INSERT INTO battery_cell_mapping\n        (battery_id, cell_id_1, cell_id_2, cell_id_3, cell_id_4, cell_id_5,\n        cell_id_6, cell_id_7, cell_id_8, cell_id_9, cell_id_10)\n\n        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n\n        ON DUPLICATE KEY UPDATE\n            cell_id_1 = VALUES(cell_id_1),\n            cell_id_2 = VALUES(cell_id_2),\n            cell_id_3 = VALUES(cell_id_3),\n            cell_id_4 = VALUES(cell_id_4),\n            cell_id_5 = VALUES(cell_id_5),\n            cell_id_6 = VALUES(cell_id_6),\n            cell_id_7 = VALUES(cell_id_7),\n            cell_id_8 = VALUES(cell_id_8),\n            cell_id_9 = VALUES(cell_id_9),\n            cell_id_10 = VALUES(cell_id_10);\n        `;\n\n    // Attach to message for MySQL node\n    msg.topic = sql;\n    msg.payload = [\n        battery_id, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10\n    ];\n\n    return msg;        // send to MySQL\n\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 660,
+        "wires": [
+            [
+                "a8af9ee0bebb97b8"
+            ]
+        ]
+    },
+    {
+        "id": "b0169104d929ca28",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "battery_main query",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let battery_id = flow.get(\"battery_id\");\n\n    let sql = `\n        INSERT IGNORE INTO battery_main \n        (battery_id, Date_Time, manufactured_timestamp)\n        VALUES (?, NOW(), NOW())\n    `;\n\n    msg.topic = sql;\n    msg.payload = [battery_id];\n\n    return msg;\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 700,
+        "wires": [
+            [
+                "a8af9ee0bebb97b8"
+            ]
+        ]
+    },
+    {
+        "id": "a8af9ee0bebb97b8",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1250,
+        "y": 700,
+        "wires": [
+            [
+                "3fb2d3917ce54f13"
+            ]
+        ]
+    },
+    {
+        "id": "3fb2d3917ce54f13",
+        "type": "debug",
+        "z": "a21af4801b6d03ca",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "9a84d91837b5e4ed",
+        "type": "comment",
+        "z": "a21af4801b6d03ca",
+        "name": "manual tested",
+        "info": "",
+        "x": 1210,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b37701bf4fa5bfe1",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 6",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n    msg.topic = `\n    SELECT serial_num, roll_weight, roll_dia\n    FROM winding_plc\n    WHERE DATE(date_time) = CURDATE()\n    ORDER BY serial_num ASC\n    LIMIT 1\n`;\n    return msg;\n\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 180,
+        "wires": [
+            [
+                "cc1c5987120424d6"
+            ]
+        ]
+    },
+    {
+        "id": "cc1c5987120424d6",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1170,
+        "y": 180,
+        "wires": [
+            [
+                "ec12b0785af3a1a6"
+            ]
+        ]
+    },
+    {
+        "id": "ec12b0785af3a1a6",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 7",
+        "func": "if (msg.payload.length === 0) {\n    node.warn(\"No pending records\");\n    return null;\n}\n\nlet row = msg.payload[0];\n\nmsg.serial_num = row.serial_num;\n\nlet cell_id = flow.get(\"cell_id\");\nlet dry_wt = flow.get(\"dry_weight\")\nlet filled_wt = flow.get(\"filled_weight\")\nlet roll_wt = row.roll_weight;\nlet roll_dia = row.roll_dia;\n\nmsg.topic = `INSERT INTO cell_main (cell_id, dry_weight, filled_weight, jelly_roll_wt, jelly_roll_dia)\n    VALUES (?, ?, ?, ?, ?)\n    ON DUPLICATE KEY UPDATE\n        dry_weight = VALUES(dry_weight),\n        filled_weight = VALUES(filled_weight)`;\n\nmsg.payload = [cell_id, dry_wt, filled_wt, roll_wt, roll_dia];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 180,
+        "wires": [
+            [
+                "25f080a0405dfc91"
+            ]
+        ]
+    },
+    {
+        "id": "25f080a0405dfc91",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1170,
+        "y": 240,
+        "wires": [
+            [
+                "8014f13c38dbfb9a"
+            ]
+        ]
+    },
+    {
+        "id": "8014f13c38dbfb9a",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 8",
+        "func": "msg.topic = `DELETE FROM winding_plc WHERE serial_num = ?`;\nmsg.payload = [msg.serial_num]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 240,
+        "wires": [
+            [
+                "4d4df8b086c5981e"
+            ]
+        ]
+    },
+    {
+        "id": "4d4df8b086c5981e",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1170,
+        "y": 300,
+        "wires": [
+            [
+                "f13fbaca240a5111"
+            ]
+        ]
+    },
+    {
+        "id": "f13fbaca240a5111",
+        "type": "debug",
+        "z": "a21af4801b6d03ca",
+        "name": "debug 18",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "781ac7406a79030a",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1010,
+        "y": 780,
+        "wires": [
+            [
+                "8adbdbbcf388b915"
+            ]
+        ]
+    },
+    {
+        "id": "8adbdbbcf388b915",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 9",
+        "func": "if (msg.payload.length === 0) {\n    node.warn(\"No pending records\");\n    return null;\n}\n\nlet row = msg.payload[0];\n\nmsg.electrode_id = row.electrode_id;\nmsg.electrode_type = row.electrode_type;\n\nlet cell_ID = flow.get(\"cell_id\");\nlet electrode_id = row.electrode_id;\n\n\nmsg.topic = `INSERT INTO cell_electrode_mapping (cell_id, anode_id)\n    VALUES (?, ?)\n    ON DUPLICATE KEY UPDATE\n        anode_id = VALUES(anode_id)\n`;\n\nmsg.payload = [cell_ID, electrode_id];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 780,
+        "wires": [
+            [
+                "eadbcbc72876eb47"
+            ]
+        ]
+    },
+    {
+        "id": "eadbcbc72876eb47",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1010,
+        "y": 840,
+        "wires": [
+            [
+                "9b6f8b9237d798a0"
+            ]
+        ]
+    },
+    {
+        "id": "9b6f8b9237d798a0",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 10",
+        "func": "msg.topic = `\n    UPDATE electrode\n    SET status = 1\n    WHERE electrode_id = ?\n`;\nmsg.payload = [msg.electrode_id]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1230,
+        "y": 840,
+        "wires": [
+            [
+                "cc218d3c931b0542"
+            ]
+        ]
+    },
+    {
+        "id": "cc218d3c931b0542",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1010,
+        "y": 900,
+        "wires": [
+            [
+                "4d552d8d9d8c06e8"
+            ]
+        ]
+    },
+    {
+        "id": "4d552d8d9d8c06e8",
+        "type": "debug",
+        "z": "a21af4801b6d03ca",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "108e11080ea5f446",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 11",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n    msg.topic = `\n\nSELECT electrode_id, electrode_type\nFROM electrode\nWHERE DATE(date_time) = CURDATE()\n  AND electrode_type = 'Anode'\n  AND status = 0\nORDER BY product_count ASC\nLIMIT 1\n`;\n    return msg;\n\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 780,
+        "wires": [
+            [
+                "781ac7406a79030a"
+            ]
+        ]
+    },
+    {
+        "id": "a154ac5bf0e732ba",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 12",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n  msg.topic = `\n\nSELECT electrode_id, electrode_type\nFROM electrode\nWHERE DATE(date_time) = CURDATE()\n  AND electrode_type = 'Cathode'\n  AND status = 0\nORDER BY product_count ASC\nLIMIT 1\n`;\n  return msg;\n\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 1000,
+        "wires": [
+            [
+                "31398efcd9d6cf25"
+            ]
+        ]
+    },
+    {
+        "id": "31398efcd9d6cf25",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1010,
+        "y": 1000,
+        "wires": [
+            [
+                "7de4bced56bc9c8b"
+            ]
+        ]
+    },
+    {
+        "id": "7de4bced56bc9c8b",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 13",
+        "func": "if (msg.payload.length === 0) {\n    node.warn(\"No pending records\");\n    return null;\n}\n\nlet row = msg.payload[0];\n\nmsg.electrode_id = row.electrode_id;\nmsg.electrode_type = row.electrode_type;\n\nlet cell_ID = flow.get(\"cell_id\");\nlet electrode_id = row.electrode_id;\n\n\nmsg.topic = `INSERT INTO cell_electrode_mapping (cell_id, cathode_id)\n    VALUES (?, ?)\n    ON DUPLICATE KEY UPDATE\n        cathode_id = VALUES(cathode_id)\n`;\n\nmsg.payload = [cell_ID, electrode_id];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1230,
+        "y": 1000,
+        "wires": [
+            [
+                "9d859cc50f195464"
+            ]
+        ]
+    },
+    {
+        "id": "9d859cc50f195464",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1010,
+        "y": 1060,
+        "wires": [
+            [
+                "2a36236810de8b49"
+            ]
+        ]
+    },
+    {
+        "id": "2a36236810de8b49",
+        "type": "function",
+        "z": "a21af4801b6d03ca",
+        "name": "function 14",
+        "func": "msg.topic = `\n    UPDATE electrode\n    SET status = 1\n    WHERE electrode_id = ?\n`;\nmsg.payload = [msg.electrode_id]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1230,
+        "y": 1060,
+        "wires": [
+            [
+                "84e9f540105896a1"
+            ]
+        ]
+    },
+    {
+        "id": "84e9f540105896a1",
+        "type": "mysql",
+        "z": "a21af4801b6d03ca",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1010,
+        "y": 1120,
+        "wires": [
+            [
+                "d42a014b491c3169"
+            ]
+        ]
+    },
+    {
+        "id": "d42a014b491c3169",
+        "type": "debug",
+        "z": "a21af4801b6d03ca",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "a06991884101aaa1",
+        "type": "inject",
+        "z": "a21af4801b6d03ca",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 90,
+        "y": 680,
+        "wires": [
+            [
+                "d3155bad6ce8c79b",
+                "63488efdca623de0",
+                "6ddbc58faa4b8345",
+                "f21571420a75a4c7",
+                "45200a0c4ccea672",
+                "f625eeb874d434ed",
+                "a8a4f041db0d0a3e",
+                "e8c1b105b9e8ccec",
+                "703c8e66c16b5944",
+                "a12bd0dbbc9a769e",
+                "2e4578ef6ba47728",
+                "e701758f2269f053",
+                "c778116ad9199965",
+                "1c3465bfc95323dd",
+                "5fd6d602f159b223",
+                "a7dcecae5a2a166d"
+            ]
+        ]
+    },
+    {
+        "id": "26025b25e5605374",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.18.16.35:4858",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "b3f91275fa8851ae",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "godrej_traceability",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "2e4bdadf00878bfe",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-opcua": "0.2.340",
+            "node-red-node-mysql": "3.0.0"
+        }
+    }
+]
