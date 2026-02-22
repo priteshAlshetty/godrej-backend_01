@@ -2,11 +2,11 @@ const mysql = require('mysql2/promise');
 require('dotenv').config();
 
 const pool = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'backend_user',
-    password: process.env.DB_PASSWORD || '1234',
-    database: process.env.DB_NAME || 'godrej_traceability',
-    port: process.env.DB_PORT || 3306, //
+    host: 'localhost',
+    user: 'backend_user',
+    password: '1234',
+    database: 'godrej_traceability',
+    port: 3306, //
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
