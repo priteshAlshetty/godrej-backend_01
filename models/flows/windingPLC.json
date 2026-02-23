@@ -1,0 +1,419 @@
+[
+    {
+        "id": "b574945dc286838f",
+        "type": "tab",
+        "label": "Winding_PLC",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ded96749d1f70fc6",
+        "type": "inject",
+        "z": "b574945dc286838f",
+        "name": "start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "9972b086f6e97d88",
+                "72e2a68da879b236",
+                "c32a22d246cb3628",
+                "dcb1f611a0e65ab1"
+            ]
+        ]
+    },
+    {
+        "id": "c406018462eb6382",
+        "type": "function",
+        "z": "b574945dc286838f",
+        "name": "serial number",
+        "func": "flow.set(\"sr_num\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 160,
+        "wires": [
+            [
+                "c149d7bba6a677ce"
+            ]
+        ]
+    },
+    {
+        "id": "3c4b1b939cb47c45",
+        "type": "function",
+        "z": "b574945dc286838f",
+        "name": "on_event_json_data",
+        "func": "// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let sr_num = flow.get(\"sr_num\");\n    let weight = flow.get(\"weight\");\n    let avg_dia = flow.get(\"roll_avg_dia\");\n\n    msg.payload = { sr_num, weight, avg_dia };\n    return msg;\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 340,
+        "wires": [
+            [
+                "d887ed790d07df8e",
+                "158dd74808c5d52b"
+            ]
+        ]
+    },
+    {
+        "id": "3ba00ba2bb8d9240",
+        "type": "function",
+        "z": "b574945dc286838f",
+        "name": "weight_kg",
+        "func": "flow.set(\"weight\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 220,
+        "wires": [
+            [
+                "142382d3b1715e65"
+            ]
+        ]
+    },
+    {
+        "id": "d887ed790d07df8e",
+        "type": "function",
+        "z": "b574945dc286838f",
+        "name": "sql query",
+        "func": "let data = msg.payload;\nlet sr_no = data.sr_num;\nlet weight = data.weight;\nlet avg_dia = data.avg_dia;\n\nlet sql = `INSERT INTO winding_plc (serial_num, roll_weight, roll_dia)\n    VALUES(?, ?, ?)\n`;\n\nmsg.payload = [sr_no, weight, avg_dia];\nmsg.topic = sql;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 340,
+        "wires": [
+            [
+                "19c144bb0ea279fb"
+            ]
+        ]
+    },
+    {
+        "id": "c149d7bba6a677ce",
+        "type": "debug",
+        "z": "b574945dc286838f",
+        "name": "debug 88",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3be077f2099cd595",
+        "type": "debug",
+        "z": "b574945dc286838f",
+        "name": "debug 89",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "158dd74808c5d52b",
+        "type": "debug",
+        "z": "b574945dc286838f",
+        "name": "debug 90",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "142382d3b1715e65",
+        "type": "debug",
+        "z": "b574945dc286838f",
+        "name": "debug 91",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "19c144bb0ea279fb",
+        "type": "mysql",
+        "z": "b574945dc286838f",
+        "mydb": "b3f91275fa8851ae",
+        "name": "",
+        "x": 1290,
+        "y": 340,
+        "wires": [
+            [
+                "3be077f2099cd595"
+            ]
+        ]
+    },
+    {
+        "id": "5f983e7007067878",
+        "type": "function",
+        "z": "b574945dc286838f",
+        "name": "avg_diameter",
+        "func": "let avg_dia = msg.payload / 1000;\nflow.set(\"roll_avg_dia\", avg_dia);\nmsg.payload = avg_dia;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 280,
+        "wires": [
+            [
+                "bcba099ca80c0caf"
+            ]
+        ]
+    },
+    {
+        "id": "bcba099ca80c0caf",
+        "type": "debug",
+        "z": "b574945dc286838f",
+        "name": "debug 92",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "66c2bbd718e6f1e7",
+        "type": "switch",
+        "z": "b574945dc286838f",
+        "name": "",
+        "property": "browseName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": ".*serial_num.*",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": ".*roll_weight_kg.*",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": ".*avg_diameter.*",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": ".*Data_Log_Trigger.*",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 690,
+        "y": 300,
+        "wires": [
+            [
+                "c406018462eb6382"
+            ],
+            [
+                "3ba00ba2bb8d9240"
+            ],
+            [
+                "5f983e7007067878"
+            ],
+            [
+                "3c4b1b939cb47c45"
+            ]
+        ]
+    },
+    {
+        "id": "7f0d10558d25250f",
+        "type": "OpcUa-Client",
+        "z": "b574945dc286838f",
+        "endpoint": "c4104abaf7b5aebe",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "5",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "Winding PLC 189:4840",
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "66c2bbd718e6f1e7"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "72e2a68da879b236",
+        "type": "OpcUa-Item",
+        "z": "b574945dc286838f",
+        "item": "ns=1;i=10",
+        "datatype": "String",
+        "value": "",
+        "name": "roll_weight_kg",
+        "x": 260,
+        "y": 260,
+        "wires": [
+            [
+                "7f0d10558d25250f"
+            ]
+        ]
+    },
+    {
+        "id": "dcb1f611a0e65ab1",
+        "type": "OpcUa-Item",
+        "z": "b574945dc286838f",
+        "item": "ns=1;i=17",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "Data_Log_Trigger",
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "7f0d10558d25250f"
+            ]
+        ]
+    },
+    {
+        "id": "9972b086f6e97d88",
+        "type": "OpcUa-Item",
+        "z": "b574945dc286838f",
+        "item": "ns=1;i=1",
+        "datatype": "Int16",
+        "value": "",
+        "name": "serial_num",
+        "x": 250,
+        "y": 200,
+        "wires": [
+            [
+                "7f0d10558d25250f"
+            ]
+        ]
+    },
+    {
+        "id": "c32a22d246cb3628",
+        "type": "OpcUa-Item",
+        "z": "b574945dc286838f",
+        "item": "ns=1;i=2",
+        "datatype": "Int32",
+        "value": "",
+        "name": "avg_diameter",
+        "x": 260,
+        "y": 320,
+        "wires": [
+            [
+                "7f0d10558d25250f"
+            ]
+        ]
+    },
+    {
+        "id": "4f584b7257f36bc2",
+        "type": "comment",
+        "z": "b574945dc286838f",
+        "name": "LATEST _TEST",
+        "info": "",
+        "x": 680,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b3f91275fa8851ae",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "godrej_traceability",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "c4104abaf7b5aebe",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.18.16.189:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "2f5d9bc65bdd250d",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-mysql": "3.0.0",
+            "node-red-contrib-opcua": "0.2.340"
+        }
+    }
+]

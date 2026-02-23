@@ -1,0 +1,604 @@
+[
+    {
+        "id": "a3af93f8b08b793f",
+        "type": "tab",
+        "label": "Powder_Handling_new",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d07e08128b0a8c94",
+        "type": "link in",
+        "z": "a3af93f8b08b793f",
+        "name": "anode_batchID_linkin1",
+        "links": [
+            "ac9c3d188fe74c59"
+        ],
+        "x": 745,
+        "y": 140,
+        "wires": [
+            [
+                "5c3aee328850aeef"
+            ]
+        ]
+    },
+    {
+        "id": "80cd456cdda9b1a7",
+        "type": "link in",
+        "z": "a3af93f8b08b793f",
+        "name": "cathode_batchID_linkin2",
+        "links": [
+            "159ffb7d1460078e"
+        ],
+        "x": 745,
+        "y": 180,
+        "wires": [
+            [
+                "73b924b389cea0a7"
+            ]
+        ]
+    },
+    {
+        "id": "b8335058a00c920c",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=25",
+        "datatype": "Float",
+        "value": "",
+        "name": "anode_zinc",
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "9bad9f05c3d5bb23",
+        "type": "OpcUa-Client",
+        "z": "a3af93f8b08b793f",
+        "endpoint": "21fb74d750a58ddd",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "5",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "Powder_Handling_PLC",
+        "x": 550,
+        "y": 460,
+        "wires": [
+            [
+                "807027a57e403093"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "807027a57e403093",
+        "type": "switch",
+        "z": "a3af93f8b08b793f",
+        "name": "",
+        "property": "browseName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "anode_zinc",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "anode_zinc_log",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "bnb_c2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "bnb_c2_log",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "emd_c1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "emd_c1_log",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "mx25",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "mx25_log",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 8,
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "38d3d15e2d1588b5"
+            ],
+            [
+                "9d56f75e9de7efbf"
+            ],
+            [
+                "da0431d2646d6e5b"
+            ],
+            [
+                "d9e51ecab9bd503b"
+            ],
+            [
+                "1143949eb86dd989"
+            ],
+            [
+                "e5e3346a5b382a20"
+            ],
+            [
+                "9427796c45a30e85"
+            ],
+            [
+                "7b30dd8f1222d5f0"
+            ]
+        ]
+    },
+    {
+        "id": "5c3aee328850aeef",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "anode_batch_id",
+        "func": "flow.set(\"anode_batch_id\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 140,
+        "wires": [
+            [
+                "97ec300263712753"
+            ]
+        ]
+    },
+    {
+        "id": "73b924b389cea0a7",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "cathode_batch_id",
+        "func": "flow.set(\"cathode_batch_id\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 180,
+        "wires": [
+            [
+                "8564faae0c1013a7"
+            ]
+        ]
+    },
+    {
+        "id": "81d4663ccbc5e17e",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=28",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "anode_zinc_log",
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "9d56f75e9de7efbf",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "anode_zinc_log",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let batch_id = flow.get(\"anode_batch_id\");\n    let anode_zinc_val = flow.get(\"anode_zinc\");\n\n    if (!batch_id) {\n        node.warn(\"anode_batch_id is missing — zinc not logged\");\n        return null;\n    }\n\n    let sql = `\nINSERT INTO batch_main (batch_id, zinc_emd)\nVALUES (?, ?)\nON DUPLICATE KEY UPDATE\nzinc_emd = VALUES(zinc_emd);\n`;\n\n    msg.topic = sql;\n    msg.payload = [batch_id, anode_zinc_val];\n\n    return msg;        // send to MySQL\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 280,
+        "wires": [
+            [
+                "902ab22d46a13bab"
+            ]
+        ]
+    },
+    {
+        "id": "38d3d15e2d1588b5",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "anode_zinc",
+        "func": "flow.set(\"anode_zinc\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc24f8831bc1b8e9",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=12",
+        "datatype": "Float",
+        "value": "",
+        "name": "bnb_c2",
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "dd3b3052f605b7fe",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=30",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "bnb_c2_log",
+        "x": 290,
+        "y": 440,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "aed05e57ab8dba83",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=6",
+        "datatype": "Float",
+        "value": "",
+        "name": "emd_c1",
+        "x": 280,
+        "y": 480,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "04256d7609ed53be",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=29",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "emd_c1_log",
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "43c1872d6fba623d",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=31",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "mx25_log",
+        "x": 280,
+        "y": 600,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "7743e46774360013",
+        "type": "OpcUa-Item",
+        "z": "a3af93f8b08b793f",
+        "item": "ns=4;i=18",
+        "datatype": "Float",
+        "value": "",
+        "name": "mx25",
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "9bad9f05c3d5bb23"
+            ]
+        ]
+    },
+    {
+        "id": "9427796c45a30e85",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "mx25",
+        "func": "flow.set(\"mx25\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1143949eb86dd989",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "emd_c1",
+        "func": "flow.set(\"emd_c1\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "da0431d2646d6e5b",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "bnb_c2",
+        "func": "flow.set(\"bnb_c2\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b30dd8f1222d5f0",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "mx25_log",
+        "func": "\n\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let batch_id = flow.get(\"cathode_batch_id\");\n    let mx25_val = flow.get(\"mx25\");\n\n    if (!batch_id) {\n        node.warn(\"cathode_batch_id missing — MX25 not logged\");\n        return null;\n    }\n\n    let sql = `\nINSERT INTO batch_main (batch_id, MX25)\nVALUES (?, ?)\nON DUPLICATE KEY UPDATE\nMX25 = VALUES(MX25);\n`;\n\n    msg.topic = sql;\n    msg.payload = [batch_id, mx25_val];\n\n\n    return msg;\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 520,
+        "wires": [
+            [
+                "902ab22d46a13bab"
+            ]
+        ]
+    },
+    {
+        "id": "e5e3346a5b382a20",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "emd_c1_log",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let batch_id = flow.get(\"cathode_batch_id\");\n    let emd_c1_val = flow.get(\"emd_c1\");\n\n    if (!batch_id) {\n        node.warn(\"cathode_batch_id is missing — EMD not logged\");\n        return null;\n    }\n\n    let sql = `\nINSERT INTO batch_main (batch_id, zinc_emd)\nVALUES (?, ?)\nON DUPLICATE KEY UPDATE\nzinc_emd = VALUES(zinc_emd);\n`;\n\n    msg.topic = sql;\n    msg.payload = [batch_id, emd_c1_val];\n\n    return msg;        // send to MySQL\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 440,
+        "wires": [
+            [
+                "902ab22d46a13bab"
+            ]
+        ]
+    },
+    {
+        "id": "d9e51ecab9bd503b",
+        "type": "function",
+        "z": "a3af93f8b08b793f",
+        "name": "bnb_c2_log",
+        "func": "\n\n// Get previous trigger value\nlet prev = context.get(\"prev_trigger\") || 0;\nlet current = msg.payload ? 1 : 0;\n\n// Store current value for next comparison\ncontext.set(\"prev_trigger\", current);\n\n// Rising edge condition: 0 → 1\nif (prev === 0 && current === 1) {\n\n    let batch_id = flow.get(\"cathode_batch_id\");\n    let bnb_c2_val = flow.get(\"bnb_c2\");\n\n    if (!batch_id) {\n        node.warn(\"cathode_batch_id is missing — BNB90 not logged\");\n        return null;\n    }\n\n    let sql = `\nINSERT INTO batch_main (batch_id, BNB90)\nVALUES (?, ?)\nON DUPLICATE KEY UPDATE\nBNB90 = VALUES(BNB90);\n`;\n\n    msg.topic = sql;\n    msg.payload = [batch_id, bnb_c2_val];\n\n\n    return msg;        // send to MyS\n}\n\n// Otherwise do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 360,
+        "wires": [
+            [
+                "902ab22d46a13bab"
+            ]
+        ]
+    },
+    {
+        "id": "902ab22d46a13bab",
+        "type": "mysql",
+        "z": "a3af93f8b08b793f",
+        "mydb": "b3f91275fa8851ae",
+        "name": "batch_main",
+        "x": 1210,
+        "y": 400,
+        "wires": [
+            [
+                "7dd80abd730e4698"
+            ]
+        ]
+    },
+    {
+        "id": "7dd80abd730e4698",
+        "type": "debug",
+        "z": "a3af93f8b08b793f",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "20d3c07ad29598e1",
+        "type": "comment",
+        "z": "a3af93f8b08b793f",
+        "name": "manual tested",
+        "info": "",
+        "x": 850,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "97ec300263712753",
+        "type": "debug",
+        "z": "a3af93f8b08b793f",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "8564faae0c1013a7",
+        "type": "debug",
+        "z": "a3af93f8b08b793f",
+        "name": "debug 25",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "08a535a2e6ce05d9",
+        "type": "inject",
+        "z": "a3af93f8b08b793f",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 90,
+        "y": 440,
+        "wires": [
+            [
+                "b8335058a00c920c",
+                "81d4663ccbc5e17e",
+                "fc24f8831bc1b8e9",
+                "dd3b3052f605b7fe",
+                "aed05e57ab8dba83",
+                "04256d7609ed53be",
+                "7743e46774360013",
+                "43c1872d6fba623d"
+            ]
+        ]
+    },
+    {
+        "id": "21fb74d750a58ddd",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.18.16.126:4847",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "b3f91275fa8851ae",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "godrej_traceability",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "0c4b444aed585b48",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-opcua": "0.2.340",
+            "node-red-node-mysql": "3.0.0"
+        }
+    }
+]

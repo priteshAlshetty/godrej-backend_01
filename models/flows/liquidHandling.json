@@ -1,0 +1,597 @@
+[
+    {
+        "id": "5a98adb0055b9d66",
+        "type": "tab",
+        "label": "Liquid_Handling_new",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3da58967e6a0086b",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=34",
+        "datatype": "String",
+        "value": "",
+        "name": "anode_batch_id",
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "302ab4473453110a",
+        "type": "OpcUa-Client",
+        "z": "5a98adb0055b9d66",
+        "endpoint": "f6acb6721ebdc9ea",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "5",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "Liquid_Handling_PLC",
+        "x": 560,
+        "y": 580,
+        "wires": [
+            [
+                "77e5abdd6c798f1d"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "77e5abdd6c798f1d",
+        "type": "switch",
+        "z": "5a98adb0055b9d66",
+        "name": "",
+        "property": "browseName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "anode_batch_id",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cathode_batch_id",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "anode_water",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "anode_water_log",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "anode_teflon",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "anode_teflon_log",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cathode_water",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cathode_water_log",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cathode_teflon",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cathode_teflon_log",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 10,
+        "x": 670,
+        "y": 400,
+        "wires": [
+            [
+                "c010ad4a220f0fe4"
+            ],
+            [
+                "310b3df5fb189092"
+            ],
+            [
+                "bdda49ccdae1c20e"
+            ],
+            [
+                "4859b0ec6284bab9"
+            ],
+            [
+                "e4c84e9009f06504"
+            ],
+            [
+                "de3364cc37be4c62"
+            ],
+            [
+                "d228b6f272e6e9e1"
+            ],
+            [
+                "5caec73dcc4c2330"
+            ],
+            [
+                "c8bfecd322bfb397"
+            ],
+            [
+                "4f3fb8badbad1c9d"
+            ]
+        ]
+    },
+    {
+        "id": "c010ad4a220f0fe4",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "anode_batch_id",
+        "func": "flow.set(\"anode_batch_id\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "310b3df5fb189092",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "cathode_batch_id",
+        "func": "flow.set(\"cathode_batch_id\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5eb1fb2424d6b580",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=35",
+        "datatype": "String",
+        "value": "",
+        "name": "cathode_batch_id",
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "4859b0ec6284bab9",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "anode_water_log",
+        "func": "\n\n    let batch_id = flow.get(\"anode_batch_id\")\n    let anode_water_val = flow.get(\"anode_water\")\n\n    let sql = `INSERT INTO batch_main (batch_id, water)\n                VALUES (?, ?)\n                ON DUPLICATE KEY UPDATE\n                    water = VALUES(water)\n            `;\n\n    msg.topic = sql\n    msg.payload = [batch_id, anode_water_val]\n\n    return msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 380,
+        "wires": [
+            [
+                "85b819fdf377ec9a"
+            ]
+        ]
+    },
+    {
+        "id": "bdda49ccdae1c20e",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "anode_water",
+        "func": "flow.set(\"anode_water\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "086f881ca3978564",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=6",
+        "datatype": "Float",
+        "value": "",
+        "name": "anode_water",
+        "x": 290,
+        "y": 500,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "47de62171d63d05e",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=25",
+        "datatype": "Int16",
+        "value": "",
+        "name": "anode_water_log",
+        "x": 310,
+        "y": 540,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "b13cc821a4cf056c",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=8",
+        "datatype": "Float",
+        "value": "",
+        "name": "anode_teflon",
+        "x": 290,
+        "y": 580,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "30dc808db91faedf",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=27",
+        "datatype": "Int16",
+        "value": "",
+        "name": "anode_teflon_log",
+        "x": 310,
+        "y": 620,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "fa025a595db19eb3",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=26",
+        "datatype": "Int16",
+        "value": "",
+        "name": "cathode_water_log",
+        "x": 310,
+        "y": 700,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "ee6cec3b4db10fe0",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=12",
+        "datatype": "Float",
+        "value": "",
+        "name": "cathode_water",
+        "x": 300,
+        "y": 660,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "c8bfecd322bfb397",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "cathode_teflon",
+        "func": "flow.set(\"cathode_teflon\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d228b6f272e6e9e1",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "cathode_water",
+        "func": "flow.set(\"cathode_water\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4c84e9009f06504",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "anode_teflon",
+        "func": "flow.set(\"anode_teflon\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f3fb8badbad1c9d",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "cathode_teflon_log",
+        "func": "\n\n    let batch_id = flow.get(\"cathode_batch_id\")\n    let cathode_teflon_val = flow.get(\"cathode_teflon\")\n\n    let sql = `INSERT INTO batch_main (batch_id, teflon)\n                VALUES (?, ?)\n                ON DUPLICATE KEY UPDATE\n                    teflon = VALUES(teflon)\n            `;\n\n    msg.topic = sql\n    msg.payload = [batch_id, cathode_teflon_val];\n    \n    return msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 620,
+        "wires": [
+            [
+                "85b819fdf377ec9a"
+            ]
+        ]
+    },
+    {
+        "id": "5caec73dcc4c2330",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "cathode_water_log",
+        "func": "\n\n    let batch_id = flow.get(\"cathode_batch_id\")\n    let cathode_water_val = flow.get(\"cathode_water\")\n\n    let sql = `INSERT INTO batch_main (batch_id, water)\n                VALUES (?, ?)\n                ON DUPLICATE KEY UPDATE\n                    water = VALUES(water)\n            `;\n\n    msg.topic = sql\n    msg.payload = [batch_id, cathode_water_val]\n\n    return msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 540,
+        "wires": [
+            [
+                "85b819fdf377ec9a"
+            ]
+        ]
+    },
+    {
+        "id": "de3364cc37be4c62",
+        "type": "function",
+        "z": "5a98adb0055b9d66",
+        "name": "anode_teflon_log",
+        "func": "\n\n    let batch_id = flow.get(\"anode_batch_id\")\n    let anode_teflon_val = flow.get(\"anode_teflon\")\n\n    let sql = `INSERT INTO batch_main (batch_id, teflon)\n                VALUES (?, ?)\n                ON DUPLICATE KEY UPDATE\n                    teflon = VALUES(teflon)\n            `;\n\n    msg.topic = sql\n    msg.payload = [batch_id, anode_teflon_val]\n\n    return msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 460,
+        "wires": [
+            [
+                "85b819fdf377ec9a"
+            ]
+        ]
+    },
+    {
+        "id": "8f591ed5032da0bc",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=28",
+        "datatype": "Int16",
+        "value": "",
+        "name": "cathode_teflon_log",
+        "x": 310,
+        "y": 780,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "b40360b2eb1382af",
+        "type": "OpcUa-Item",
+        "z": "5a98adb0055b9d66",
+        "item": "ns=4;i=15",
+        "datatype": "Float",
+        "value": "",
+        "name": "cathode_teflon",
+        "x": 300,
+        "y": 740,
+        "wires": [
+            [
+                "302ab4473453110a"
+            ]
+        ]
+    },
+    {
+        "id": "85b819fdf377ec9a",
+        "type": "mysql",
+        "z": "5a98adb0055b9d66",
+        "mydb": "b3f91275fa8851ae",
+        "name": "batch_main",
+        "x": 1150,
+        "y": 520,
+        "wires": [
+            [
+                "4b545798dedcbd76"
+            ]
+        ]
+    },
+    {
+        "id": "4b545798dedcbd76",
+        "type": "debug",
+        "z": "5a98adb0055b9d66",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "fa65673fa6f08696",
+        "type": "comment",
+        "z": "5a98adb0055b9d66",
+        "name": "manual tested",
+        "info": "",
+        "x": 865.8958129882812,
+        "y": 157.01388549804688,
+        "wires": []
+    },
+    {
+        "id": "1c934d3e1c16c6fd",
+        "type": "inject",
+        "z": "5a98adb0055b9d66",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 90,
+        "y": 580,
+        "wires": [
+            [
+                "3da58967e6a0086b",
+                "5eb1fb2424d6b580",
+                "086f881ca3978564",
+                "47de62171d63d05e",
+                "b13cc821a4cf056c",
+                "30dc808db91faedf",
+                "ee6cec3b4db10fe0",
+                "fa025a595db19eb3",
+                "b40360b2eb1382af",
+                "8f591ed5032da0bc"
+            ]
+        ]
+    },
+    {
+        "id": "c91ca7d9bda5bf8e",
+        "type": "comment",
+        "z": "5a98adb0055b9d66",
+        "name": "LATEST TEST",
+        "info": "",
+        "x": 680,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f6acb6721ebdc9ea",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.18.16.120:4854",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "b3f91275fa8851ae",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "godrej_traceability",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "981908f0b7a7ccb9",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-opcua": "0.2.340",
+            "node-red-node-mysql": "3.0.0"
+        }
+    }
+]

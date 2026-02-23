@@ -1,0 +1,714 @@
+[
+    {
+        "id": "1e2357629cb7ebce",
+        "type": "tab",
+        "label": "Cathode_Oven_new",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b228a3f1a830cd02",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=9",
+        "datatype": "Float",
+        "value": "",
+        "name": "IR_temp_1",
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "a0009cd143ccb7be",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=10",
+        "datatype": "Float",
+        "value": "",
+        "name": "IR_temp_2",
+        "x": 330,
+        "y": 240,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "af0be93c09c3440a",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=7",
+        "datatype": "Int16",
+        "value": "",
+        "name": "zone_temp_1",
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "261504d867874910",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=8",
+        "datatype": "Int16",
+        "value": "",
+        "name": "zone_temp_2",
+        "x": 340,
+        "y": 420,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "6a3433fc7e4376f8",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=22",
+        "datatype": "Int16",
+        "value": "",
+        "name": "Log_Event_Bit",
+        "x": 340,
+        "y": 540,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "e38abee8b1e77692",
+        "type": "OpcUa-Client",
+        "z": "1e2357629cb7ebce",
+        "endpoint": "0cb3a1c06bd4d2c6",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "5",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Cathode Oven 139:4846",
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "b6ad7f14d03aa32b"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b6ad7f14d03aa32b",
+        "type": "switch",
+        "z": "1e2357629cb7ebce",
+        "name": "Route by Tag",
+        "property": "browseName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "IR_temp_1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "IR_temp_2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "IR_temp_3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "zone_temp_1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "zone_temp_2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Product_Daily_Count",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Log_Event_Bit",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "chain_speed",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 9,
+        "x": 710,
+        "y": 420,
+        "wires": [
+            [
+                "10eb6f24c47e6ebb"
+            ],
+            [
+                "a82d41cd9bc85a1c"
+            ],
+            [
+                "887660dce1a5a286"
+            ],
+            [
+                "7a34e269ec902153"
+            ],
+            [
+                "1091cf4c9a59b6f4"
+            ],
+            [
+                "1e875cc807a7e2ff"
+            ],
+            [
+                "655a4bca402a52cc"
+            ],
+            [
+                "75077d764f5b55c5"
+            ],
+            [
+                "f94ba5f8dfc7f5a2"
+            ]
+        ]
+    },
+    {
+        "id": "10eb6f24c47e6ebb",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "IR_Temp1",
+        "func": "flow.set(\"IR_temp1_c\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 220,
+        "wires": [
+            [
+                "4b3e90c27e14970f"
+            ]
+        ]
+    },
+    {
+        "id": "a82d41cd9bc85a1c",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "IR_Temp2",
+        "func": "flow.set(\"IR_temp2_c\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 280,
+        "wires": [
+            [
+                "2b7dc5abbe7cec62"
+            ]
+        ]
+    },
+    {
+        "id": "7a34e269ec902153",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "zone_temp_1",
+        "func": "flow.set(\"zone1_temp_c\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 400,
+        "wires": [
+            [
+                "7a13ca4786287bb4"
+            ]
+        ]
+    },
+    {
+        "id": "1091cf4c9a59b6f4",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "zone_temp_2",
+        "func": "flow.set(\"zone2_temp_c\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 440,
+        "wires": [
+            [
+                "42b6690530b54f4d"
+            ]
+        ]
+    },
+    {
+        "id": "655a4bca402a52cc",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "create_json_object",
+        "func": "let id_c = flow.get(\"ID_c\");\nlet irTemp1_c= flow.get(\"IR_temp1_c\");\nlet irTemp2_c = flow.get(\"IR_temp2_c\");\nlet irTemp3_c = flow.get(\"IR_temp3_c\");\nlet chain = flow.get(\"chain_spped\");\nlet z1Temp_c = flow.get(\"zone1_temp_c\");\nlet z2Temp_c = flow.get(\"zone2_temp_c\");\nlet humidity = flow.get(\"humidity\")\nlet type = \"Cathode\"\n    \nmsg.payload = { id_c, irTemp1_c, irTemp2_c, irTemp3_c, chain, z1Temp_c, z2Temp_c, humidity, type};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 560,
+        "wires": [
+            [
+                "01d2eb9f10e21ba8",
+                "bdade49ea318f61e"
+            ]
+        ]
+    },
+    {
+        "id": "01d2eb9f10e21ba8",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "function 4",
+        "func": "let data = msg.payload;\n\nmsg.topic = `\nINSERT INTO electrode \n(electrode_id, IR_temp_1, IR_temp_2, IR_temp_3, \n chain_speed, zone_temp_1, zone_temp_2, humidity, electrode_type)\nVALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)\nON DUPLICATE KEY UPDATE\n    IR_temp_1   = VALUES(IR_temp_1),\n    IR_temp_2   = VALUES(IR_temp_2),\n    IR_temp_3   = VALUES(IR_temp_3),\n    chain_speed = VALUES(chain_speed),\n    zone_temp_1 = VALUES(zone_temp_1),\n    zone_temp_2 = VALUES(zone_temp_2),\n    humidity    = VALUES(humidity),\n    electrode_type  = VALUES(electrode_type);\n`;\n\nmsg.payload = [\n    data.id_c,\n    data.irTemp1_c,\n    data.irTemp2_c,\n    data.irTemp3_c,\n    data.chain,\n    data.z1Temp_c,\n    data.z2Temp_c,\n    data.humidity,\n    data.type\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 560,
+        "wires": [
+            [
+                "de8abe993bf15b7b"
+            ]
+        ]
+    },
+    {
+        "id": "8a9b4b5628d73a52",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 80",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "42b6690530b54f4d",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 81",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "4b3e90c27e14970f",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 82",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2b7dc5abbe7cec62",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 83",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "7a13ca4786287bb4",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 84",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bdade49ea318f61e",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 85",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "cc6886b0b377d13b",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=4",
+        "datatype": "Int32",
+        "value": "",
+        "name": "Product_Daily_Count",
+        "x": 360,
+        "y": 480,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "1e875cc807a7e2ff",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "electrode_id",
+        "func": "let id_c = msg.payload;\nlet time = new Date();\n\n// Format the date as DD-MM-YYYY\nlet date = time.toISOString().split('T')[0];\nlet dateFormat = date.split('-').reverse().join('-');\n\nlet electrode_id_c = \"CE \" + dateFormat + \" \" + id_c;\n\nflow.set(\"ID_c\", electrode_id_c);\n\nmsg.payload = electrode_id_c;\n  \nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 500,
+        "wires": [
+            [
+                "43ebc1c57ebc4377"
+            ]
+        ]
+    },
+    {
+        "id": "43ebc1c57ebc4377",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 86",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f140566c8b76e304",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=11",
+        "datatype": "Float",
+        "value": "",
+        "name": "IR_temp_3",
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "887660dce1a5a286",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "IR_Temp3",
+        "func": "flow.set(\"IR_temp3_c\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 340,
+        "wires": [
+            [
+                "f8d20e2be1f60911"
+            ]
+        ]
+    },
+    {
+        "id": "f8d20e2be1f60911",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 87",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d91e967960390888",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=23",
+        "datatype": "Float",
+        "value": "",
+        "name": "chain_speed",
+        "x": 330,
+        "y": 600,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "75077d764f5b55c5",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "chain_speed",
+        "func": "\nflow.set(\"chain_spped\", msg.payload)\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 560,
+        "wires": [
+            [
+                "bdade49ea318f61e"
+            ]
+        ]
+    },
+    {
+        "id": "de8abe993bf15b7b",
+        "type": "mysql",
+        "z": "1e2357629cb7ebce",
+        "mydb": "b3f91275fa8851ae",
+        "name": "electrode cathode",
+        "x": 1230,
+        "y": 620,
+        "wires": [
+            [
+                "8a9b4b5628d73a52"
+            ]
+        ]
+    },
+    {
+        "id": "bf374f6ee0ba2e02",
+        "type": "comment",
+        "z": "1e2357629cb7ebce",
+        "name": "manual tested",
+        "info": "",
+        "x": 1050,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b5a146ca8371b6e7",
+        "type": "OpcUa-Item",
+        "z": "1e2357629cb7ebce",
+        "item": "ns=4;i=25",
+        "datatype": "Float",
+        "value": "",
+        "name": "humidity",
+        "x": 320,
+        "y": 660,
+        "wires": [
+            [
+                "e38abee8b1e77692"
+            ]
+        ]
+    },
+    {
+        "id": "f94ba5f8dfc7f5a2",
+        "type": "function",
+        "z": "1e2357629cb7ebce",
+        "name": "humidity",
+        "func": "\nflow.set(\"humidity\", msg.payload)\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 620,
+        "wires": [
+            [
+                "2e225e30128dba20"
+            ]
+        ]
+    },
+    {
+        "id": "2e225e30128dba20",
+        "type": "debug",
+        "z": "1e2357629cb7ebce",
+        "name": "debug 9",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "fa84659fc9c0c52e",
+        "type": "inject",
+        "z": "1e2357629cb7ebce",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 90,
+        "y": 400,
+        "wires": [
+            [
+                "b228a3f1a830cd02",
+                "a0009cd143ccb7be",
+                "f140566c8b76e304",
+                "af0be93c09c3440a",
+                "261504d867874910",
+                "cc6886b0b377d13b",
+                "6a3433fc7e4376f8",
+                "d91e967960390888",
+                "b5a146ca8371b6e7"
+            ]
+        ]
+    },
+    {
+        "id": "78cf296f126c41bc",
+        "type": "comment",
+        "z": "1e2357629cb7ebce",
+        "name": "LATEST TEST",
+        "info": "",
+        "x": 660,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "0cb3a1c06bd4d2c6",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.18.16.139:4846",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "b3f91275fa8851ae",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "godrej_traceability",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "53b2dac58fa1bfec",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-opcua": "0.2.340",
+            "node-red-node-mysql": "3.0.0"
+        }
+    }
+]

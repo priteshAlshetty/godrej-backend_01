@@ -1,0 +1,359 @@
+[
+    {
+        "id": "214711f1991d61d0",
+        "type": "tab",
+        "label": "PHS_Anode_New",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bb685832a9c8e6f9",
+        "type": "OpcUa-Item",
+        "z": "214711f1991d61d0",
+        "item": "ns=4;i=17",
+        "datatype": "Float",
+        "value": "",
+        "name": "ambient_temp",
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "93e0dc9f61d82f4d",
+                "25ca2584fe94445f"
+            ]
+        ]
+    },
+    {
+        "id": "93e0dc9f61d82f4d",
+        "type": "OpcUa-Client",
+        "z": "214711f1991d61d0",
+        "endpoint": "8b8787675c653e06",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "5",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": 1,
+        "maxMessageSize": 8192,
+        "receiveBufferSize": 8192,
+        "sendBufferSize": 8192,
+        "setstatusandtime": false,
+        "keepsessionalive": false,
+        "name": "PHS Anode 144:4852",
+        "x": 720,
+        "y": 260,
+        "wires": [
+            [
+                "25ca2584fe94445f"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "25ca2584fe94445f",
+        "type": "switch",
+        "z": "214711f1991d61d0",
+        "name": "",
+        "property": "browseName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ambient_temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cathode_ambient_temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "cathode_humidity",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 930,
+        "y": 260,
+        "wires": [
+            [
+                "82d2159d9f5d5708"
+            ],
+            [
+                "0632c042f3797183"
+            ],
+            [
+                "e7491214d1765c3e"
+            ],
+            [
+                "330ef49766b10ff9"
+            ]
+        ]
+    },
+    {
+        "id": "1e2c3fab8bba45ae",
+        "type": "OpcUa-Item",
+        "z": "214711f1991d61d0",
+        "item": "ns=4;i=18",
+        "datatype": "Float",
+        "value": "",
+        "name": "humidity",
+        "x": 460,
+        "y": 300,
+        "wires": [
+            [
+                "93e0dc9f61d82f4d",
+                "25ca2584fe94445f"
+            ]
+        ]
+    },
+    {
+        "id": "82d2159d9f5d5708",
+        "type": "link out",
+        "z": "214711f1991d61d0",
+        "name": "anode_ambient_temp_linkout1",
+        "mode": "link",
+        "links": [
+            "03cd37869707398c"
+        ],
+        "x": 1075,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0632c042f3797183",
+        "type": "link out",
+        "z": "214711f1991d61d0",
+        "name": "anode_humidity_linkout2",
+        "mode": "link",
+        "links": [
+            "4ca5b5960672dfca"
+        ],
+        "x": 1075,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2a625f39cccdff26",
+        "type": "OpcUa-Item",
+        "z": "214711f1991d61d0",
+        "item": "ns=4;i=19",
+        "datatype": "Float",
+        "value": "",
+        "name": "cathode_ambient_temp",
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "93e0dc9f61d82f4d",
+                "25ca2584fe94445f"
+            ]
+        ]
+    },
+    {
+        "id": "cd16a37feb846609",
+        "type": "OpcUa-Item",
+        "z": "214711f1991d61d0",
+        "item": "ns=4;i=20",
+        "datatype": "Float",
+        "value": "",
+        "name": "cathode_humidity",
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "93e0dc9f61d82f4d",
+                "25ca2584fe94445f"
+            ]
+        ]
+    },
+    {
+        "id": "330ef49766b10ff9",
+        "type": "link out",
+        "z": "214711f1991d61d0",
+        "name": "cathode_humidity_linkout2",
+        "mode": "link",
+        "links": [
+            "9feae38ddd48e2f4"
+        ],
+        "x": 1075,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e7491214d1765c3e",
+        "type": "link out",
+        "z": "214711f1991d61d0",
+        "name": "cathode_ambient_temp_linkout1",
+        "mode": "link",
+        "links": [
+            "b5fbd5e4040a5d4d"
+        ],
+        "x": 1065,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "0d61df54173f77f8",
+        "type": "inject",
+        "z": "214711f1991d61d0",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 250,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "707ee2572dac316d",
+        "type": "comment",
+        "z": "214711f1991d61d0",
+        "name": "manul testing",
+        "info": "",
+        "x": 870,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "9bc7504b5a481296",
+        "type": "inject",
+        "z": "214711f1991d61d0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "122",
+        "payloadType": "num",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "bb685832a9c8e6f9"
+            ]
+        ]
+    },
+    {
+        "id": "ae1cf6110a7a8232",
+        "type": "inject",
+        "z": "214711f1991d61d0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "155",
+        "payloadType": "num",
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "cd16a37feb846609"
+            ]
+        ]
+    },
+    {
+        "id": "2a14336fba9144ec",
+        "type": "inject",
+        "z": "214711f1991d61d0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "144",
+        "payloadType": "num",
+        "x": 230,
+        "y": 360,
+        "wires": [
+            [
+                "2a625f39cccdff26"
+            ]
+        ]
+    },
+    {
+        "id": "eba7ee322846f1e7",
+        "type": "inject",
+        "z": "214711f1991d61d0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "133",
+        "payloadType": "num",
+        "x": 230,
+        "y": 280,
+        "wires": [
+            [
+                "1e2c3fab8bba45ae"
+            ]
+        ]
+    },
+    {
+        "id": "8b8787675c653e06",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.18.16.144:4852",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "c9ea27a17236ef55",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-opcua": "0.2.340"
+        }
+    }
+]

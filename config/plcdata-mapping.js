@@ -42,13 +42,13 @@ const MACHINE_MAP = {
     powderHandling: {
         cell_main: [],
         battery_main: [],
-        batch_main: ["batch_id", "zinc_emd", "BNB90", "zinc_emd", "MX25"],
+        batch_main: ["batch_id", "zinc_emd", "BNB90",  "MX25"],
         electrode: []        
     },
     anodeMixer: {
         cell_main: [],
         battery_main: [],
-        batch_main: ["batch_id", "mixing_time", "final_paste_temp", "max_current", 
+        batch_main: ["batch_id", "start_timestamp", "stop_timestamp", "mixing_time", "final_paste_temp", "max_current", 
             "max_torque", "batch_size", "paste_moisture", "paste_density", "penetration", 
             "laponite", "graphite_indium", "BNB90", "bismuth"],
         electrode: []       
@@ -56,7 +56,7 @@ const MACHINE_MAP = {
     cathodeMixer: {
         cell_main: [],
         battery_main: [],
-        batch_main: ["batch_id", "mixing_time", "final_paste_temp", 
+        batch_main: ["batch_id", "start_timestamp", "stop_timestamp", "mixing_time", "final_paste_temp", 
             "max_current", "max_torque", "batch_size", "paste_moisture", 
             "paste_density", "penetration", "bismuth"],
         electrode: []        
@@ -64,8 +64,7 @@ const MACHINE_MAP = {
     liquidHandling: {
         cell_main: [],
         battery_main: [],
-        batch_main: ["batch_id", "water", "teflon", "MX25"
-        ],
+        batch_main: ["batch_id", "water", "teflon"],
         electrode: []       
     },
     plc1: {
@@ -87,7 +86,7 @@ const MACHINE_MAP = {
         electrode: []        
     },
     windingMachine: {
-        cell_main: [],
+        cell_main: ["cell_id", "jelly_roll_wt", "jelly_roll_dia"],
         battery_main: [],
         batch_main: [],
         electrode: []        
