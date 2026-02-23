@@ -293,28 +293,77 @@ async function getTraceByCellId(cell_id) {
     }
 }
 
+// async function getDataBySingleBatchId(batch_id) {
+//     try {
+//         const [rows] = await db.query('SELECT * FROM batch_main WHERE batch_id = ?', [batch_id]);
+
+//         if (!rows || rows.length === 0) {
+//             throw new Error(`No data found for batch: ${batch_id}`);
+//         } else {
+//             const batchData = rows[0];
+//             batchData.start_timestamp = formatToLocal(batchData.start_timestamp);
+//             batchData.stop_timestamp = formatToLocal(batchData.stop_timestamp);
+//             return {
+//                 SUCCESS: true,
+//                 batch_data: batchData,
+//             };
+//         }
+//     } catch (error) {
+//         console.error('Error in getDataBySingleBatchId:', error);
+//         return {
+//             SUCCESS: false,
+//             batch_id,
+//             errMsg: error.message || 'Unknown error occurred',
+//             location: 'getDataBySingleBatchId controller function call ==> try-catch block',
+//             stack: error.stack || null,
+//         };
+//     }
+// }
 async function getDataBySingleBatchId(batch_id) {
     try {
-        const [rows] = await db.query('SELECT * FROM batch_main WHERE batch_id = ?', [batch_id]);
+        // Validate input early
+        if (!batch_id) {
+            throw new Error("batch_id is required");
+        }
 
+        // Build SQL
+        const sql = db.format(
+            "SELECT * FROM batch_main WHERE batch_id = ?",
+            [batch_id]
+        );
+
+        // console.log("Executing SQL:", sql);
+
+        // Run query
+        let rows;
+        [rows] = await db.query(sql);
+
+        // console.log("Query result:", rows);
+
+        // Validate result
         if (!rows || rows.length === 0) {
             throw new Error(`No data found for batch: ${batch_id}`);
-        } else {
-            const batchData = rows[0];
-            batchData.start_timestamp = formatToLocal(batchData.start_timestamp);
-            batchData.stop_timestamp = formatToLocal(batchData.stop_timestamp);
-            return {
-                SUCCESS: true,
-                batch_data: batchData,
-            };
         }
+
+        const batchData = rows[0];
+
+        // Safe timestamp formatting
+        batchData.start_timestamp = formatToLocal(batchData.start_timestamp);
+        batchData.stop_timestamp = formatToLocal(batchData.stop_timestamp);
+
+        return {
+            SUCCESS: true,
+            batch_data: batchData,
+        };
+
     } catch (error) {
-        console.error('Error in getDataBySingleBatchId:', error);
+        console.error("Error in getDataBySingleBatchId:", error);
+
         return {
             SUCCESS: false,
             batch_id,
-            errMsg: error.message || 'Unknown error occurred',
-            location: 'getDataBySingleBatchId controller function call ==> try-catch block',
+            errMsg: error.message || "Unknown error occurred",
+            location: "getDataBySingleBatchId controller function",
             stack: error.stack || null,
         };
     }

@@ -120,7 +120,10 @@ router.post('/trace/batch-id', async (req, res) => {
                     result,
                 });
             } else {
-                throw new Error('Trace not found for batch_id: ' + batch_id);
+                res.status(400).json({
+                    message: `Data not found for batch_id: ${batch_id}`,
+                    success: false,
+                });
             }
         }
     } catch (error) {
@@ -136,23 +139,23 @@ router.post('/trace/batch-id', async (req, res) => {
     }
 });
 
-router.post('/trace/electrode-id', async(req,res) => {
-    try{
+router.post('/trace/electrode-id', async (req, res) => {
+    try {
         const electrode_id = req.body.electrode_id;
-        if (!electrode_id){
+        if (!electrode_id) {
             res.status(400).json({
-                success:false,
+                success: false,
                 'errMsg': 'missing required field : electrode_id'
             })
-        }else{
+        } else {
             const trace = await getTraceFromElectrodeId(electrode_id);
-            if (trace && trace.SUCCESS){
+            if (trace && trace.SUCCESS) {
                 res.status(200).json({
                     success: true,
                     message: 'Trace retrieved successfully',
                     trace: trace,
                 });
-            }else{
+            } else {
                 res.status(400).json({
                     message: 'Trace not found',
                     success: false,
@@ -164,10 +167,10 @@ router.post('/trace/electrode-id', async(req,res) => {
             }
         }
 
-    }catch(error){
+    } catch (error) {
         res.status(500).json({
-            errMsg : "Internal server error",
-            success:false,
+            errMsg: "Internal server error",
+            success: false,
             error: error.message,
             error_stack: error.stack,
             location: "At api call /trace/electrode-id => try-catch block"
@@ -175,38 +178,38 @@ router.post('/trace/electrode-id', async(req,res) => {
     }
 })
 
-router.post('/trace/date', async(req,res) =>{
+router.post('/trace/date', async (req, res) => {
 
-    try{
+    try {
         const date = req.body.date;
-        if(!date){
+        if (!date) {
             res.status(400).json({
                 error: "missing required field: date"
             })
-        }else{
+        } else {
             const dateFormatted = dayjs(date).format('YYYY-MM-DD');
             const list = await getTraceByDate(dateFormatted);
-            if(list && list.SUCCESS){
+            if (list && list.SUCCESS) {
 
                 res.status(200).json({
-                    success:true,
+                    success: true,
                     date,
-                    trace:list.objectList
+                    trace: list.objectList
                 })
-            }else{
+            } else {
                 res.status(404).json({
-                    success:false,
+                    success: false,
                     date,
-                    trace:list,
+                    trace: list,
                     errMsg: 'empty or wrong list returned by controller getTraceByDate()'
 
                 })
             }
         }
-    }catch(error){
+    } catch (error) {
         res.status(500).json({
-            errMsg : "Internal server error",
-            success:false,
+            errMsg: "Internal server error",
+            success: false,
             error: error.message,
             error_stack: error.stack,
             location: "At api call /trace/date => try-catch block"
