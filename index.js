@@ -8,11 +8,12 @@ const { swaggerUi, swaggerSpec } = require('./swagger');
 const port = 5000;
 const app = express();
 
-const corsOptions = {
-    origin: ['http://192.168.1.32:5173', 'http://192.168.1.48:5173', 'http://localhost:5173'], // must exactly match frontend origin
-    credentials: true, // allow cookies/auth headers
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: ['http://192.168.1.32:5173', 'http://192.168.1.48:5173', 'http://localhost:5173'], // must exactly match frontend origin
+//     credentials: true, // allow cookies/auth headers
+// };
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // Swagger page route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
