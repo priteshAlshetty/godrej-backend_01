@@ -1041,3 +1041,53 @@
  *       500:
  *         description: Internal server error
  */
+/**
+ * @swagger
+ * /api/mfm/meterNames:
+ *   get:
+ *     summary: Get all available meter names
+ *     tags:
+ *       - MFM Routes
+ *     responses:
+ *       200:
+ *         description: Successfully fetched meter names
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               data: ["assembly", "utility", "compressor"]
+ *       400:
+ *         description: No data found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/mfm/meterData:
+ *   get:
+ *     summary: Get meter data by meter name and date
+ *     tags:
+ *       - MFM Routes
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: assembly
+ *       - in: query
+ *         name: date
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         example: 2026-04-17
+ *     responses:
+ *       200:
+ *         description: Successfully fetched meter data
+ *       400:
+ *         description: Data not found
+ *       500:
+ *         description: Internal server error
+ */
