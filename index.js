@@ -28,6 +28,9 @@ const getDailyReports = require('./routes/excelReports');
 const getMachineData = require('./routes/getMachineDataRoute');
 const batteryCellIDs = require('./routes/batteryCell.route');
 const mfmRoutes = require('./routes/mfmRoutes');
+const homescreen = require('./routes/homeScreen.route');
+
+
 
 const logger = require('./middleware/logger');
 const db = require('./config/db');
@@ -47,6 +50,7 @@ app.use('/api', getDailyReports);
 app.use('/api', getMachineData);
 app.use('/api', batteryCellIDs)
 app.use('/api/mfm', mfmRoutes);
+app.use('/api', homescreen);
 
 // Start server
 app.listen(port, '0.0.0.0', () => {

@@ -1091,3 +1091,40 @@
  *       500:
  *         description: Internal server error
  */
+
+/**
+ * @swagger
+ * /api/homescreen:
+ *   get:
+ *     summary: Get home screen dashboard data
+ *     description: Fetches the home screen dashboard data including summary information required for the application home screen.
+ *     tags:
+ *       - Homescreen Data
+ *     responses:
+ *       200:
+ *         description: Home screen data fetched successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               data:
+ *                 totalMachines: 12
+ *                 activeMachines: 10
+ *                 totalProduction: 15420
+ *                 rejectedCount: 125
+ *                 lastUpdated: "2026-05-10 14:30:00"
+ *       404:
+ *         description: No data found
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "No data found"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "Internal server error"
+ */
