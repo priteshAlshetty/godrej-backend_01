@@ -1,7 +1,7 @@
 node_modules/
 dailyReports/
 Dockerfile
-
+logs/
 docker-compose.yml
 
 .env
