@@ -29,6 +29,8 @@ const getMachineData = require('./routes/getMachineDataRoute');
 const batteryCellIDs = require('./routes/batteryCell.route');
 const mfmRoutes = require('./routes/mfmRoutes');
 const homescreen = require('./routes/homeScreen.route');
+const plcStatusRoutes = require('./routes/plcStatus.routes');
+
 
 
 
@@ -42,6 +44,8 @@ app.use(cookieParser());
 app.use(responseTime()); // for debugging response time
 
 // Routes
+app.use('/api', plcStatusRoutes);
+
 app.use('/api', userRoutes);
 app.use('/api', uploadXLSX);
 app.use('/api', getTrace);
@@ -55,4 +59,6 @@ app.use('/api', homescreen);
 // Start server
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server running on http://localhost:${port}`);
+    console.log(`Swagger Docs: http://localhost:${port}/api-docs`);
+    console.log(`Health Check: http://localhost:${port}/api/test-db-conn`);
 });

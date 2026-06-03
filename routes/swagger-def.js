@@ -1128,3 +1128,54 @@
  *               success: false
  *               message: "Internal server error"
  */
+/**
+ * @swagger
+ * /api/plcstatus:
+ *   get:
+ *     summary: Get PLC connectivity status
+ *     description: Retrieves the current status of all configured PLCs including IP address, port, connection status, and last logged timestamp.
+ *     tags:
+ *       - PLC Status
+ *     responses:
+ *       200:
+ *         description: PLC status data fetched successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 plcData:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       sr_no:
+ *                         type: integer
+ *                         example: 1
+ *                       name:
+ *                         type: string
+ *                         example: PLC-01
+ *                       ip:
+ *                         type: string
+ *                         example: 192.168.1.10
+ *                       port:
+ *                         type: integer
+ *                         example: 102
+ *                       status:
+ *                         type: boolean
+ *                         example: 0
+ *                       timestamp:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2026-06-03 10:33:55"
+ *       500:
+ *         description: Failed to fetch PLC status.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Failed to fetch PLC status
+ */
