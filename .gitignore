@@ -4,5 +4,9 @@ Dockerfile
 logs/
 docker-compose.yml
 
+
 .env
 .dockerignore
+
+.csv
+*.csv

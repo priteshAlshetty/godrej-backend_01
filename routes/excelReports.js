@@ -77,6 +77,8 @@ router.get('/download/csv', async (req, res) => {
         const from = req.query.from;
         const to = req.query.to;
         const filePath = await getMachineData({ table_name, from, to });
+        // console.log("filePath:", filePath);
+        // console.log("exists:", fs.existsSync(filePath));
 
         if (!table_name || !from || !to) {
             return res.status(400).json({
@@ -90,7 +92,7 @@ router.get('/download/csv', async (req, res) => {
                 if (!err) {
                     fs.unlinkSync(filePath);
                 } else {
-                    console.log("***while deleting machine data file: " + err);
+                    console.error("***while deleting machine data file: " + err);
                 }
             });
         } else {
@@ -99,6 +101,12 @@ router.get('/download/csv', async (req, res) => {
             });
         }
     } catch (error) {
+        if (error.message.includes('No machine data found')) {
+            return res.status(404).json({
+                success: false,
+                errMsg: error.message,
+            });
+        }
         res.status(500).json({
             success: false,
             errMsg: 'Internal server error',

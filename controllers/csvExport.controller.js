@@ -1,4 +1,4 @@
-const db = require("../../config/machineData.js");
+const db = require("../config/machineData.js");
 const fs = require('fs');
 const path = require('path');
 
@@ -13,7 +13,7 @@ async function getMachineData(params) {
 
         if (rows.length === 0) {
             console.warn(`No machine data found for the specified table ${params.table_name} and date range: ${params.from} to ${params.to}`);
-            return null;
+            throw new Error(`No machine data found for the specified table ${params.table_name} and date range: ${params.from} to ${params.to}`);
         }
 
         const stream = fs.createWriteStream(filePath, {
@@ -34,12 +34,18 @@ async function getMachineData(params) {
             });
             stream.write(values.join(',') + '\n');
         }
-        stream.end();
+        await new Promise((resolve, reject) => {
+            stream.on('finish', resolve);
+            stream.on('error', reject);
+            stream.end();
+        });
+
+        return filePath;
         return filePath; // Return the path to the generated CSV file
 
     } catch (err) {
         console.error(`Error fetching machine data for table ${params.table_name}:`, err.message);
-        return null;
+        throw err;
     }
 }
 
