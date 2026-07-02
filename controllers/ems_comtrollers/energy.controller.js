@@ -41,11 +41,46 @@ ORDER BY hour_time;`;
 
 async function getEnergyDataAllMachines(params) {
 
-    const [rows] = await db.query(`SELECT name FROM mfm_map`);
+    try {
+        const [rows] = await db.query(`SELECT name FROM mfm_map`);
+        const energyData = {};
 
-    console.log(rows);
+        for (const row of rows) {
+            const [data] = await db.query(
+                `SELECT
+                        (
+                            SELECT KWh
+                            FROM ${row.name}
+                            WHERE date_time >= ?
+                                AND date_time < ?
+                            ORDER BY date_time DESC
+                            LIMIT 1
+                        )
+                        -
+                        (
+                            SELECT KWh
+                            FROM ${row.name}
+                            WHERE date_time >= ?
+                                AND date_time < ?
+                            ORDER BY date_time ASC
+                            LIMIT 1
+                        ) AS KWh_consumption;`,
+                [params.from, params.to, params.from, params.to]);
+            energyData[row.name] = data[0].KWh_consumption;
+        }
+        for (const machine in energyData) {
+            if (energyData[machine] === null) {
+                energyData[machine] = 0;
+            }
+        }
 
+        return energyData;
+    } catch (error) {
+        console.error("Error fetching energy data for all machines:", error);
+        throw error;
+    }
 }
+
 module.exports = {
     getEnergyData,
     getEnergyDataAllMachines

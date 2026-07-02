@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getNames, getMFMData } = require("../controllers/ems_comtrollers/rawdata.controller.js");
-const { getEnergyData } = require("../controllers/ems_comtrollers/energy.controller.js");
+const { getEnergyData, getEnergyDataAllMachines } = require("../controllers/ems_comtrollers/energy.controller.js");
 
 router.get("/meterNames", async (req, res) => {
     try {
@@ -96,4 +96,27 @@ router.get("/energyData", async (req, res) => {
     }
 });
 
+router.get("/energyData/AllMachines", async (req, res) => {
+    try {
+        const from = req.query.from;
+        const to = req.query.to;
+        const params = {
+            from,
+            to
+        };
+        const result = await getEnergyDataAllMachines(params);
+        res.status(200).json({
+            success: true,
+            data: result
+        });
+    } catch (err) {
+        res.status(500).json({
+            errMsg: 'Internal server error',
+            success: false,
+            error: err.message,
+            stack: err.stack,
+            location: 'At api call /ems/rawdata/energyData/AllMachines => catch block'
+        });
+    }
+});
 module.exports = router;

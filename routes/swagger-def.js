@@ -1257,3 +1257,61 @@
  *                 stack:
  *                   type: string
  */
+/**
+ * @swagger
+ * /api/mfm/energyData/AllMachines:
+ *   get:
+ *     summary: Get energy data for all machines
+ *     description: Returns energy consumption data for all machines within the specified date and time range.
+ *     tags:
+ *       - MFM Routes
+ *     parameters:
+ *       - in: query
+ *         name: from
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Start date .
+ *         example: "2026-04-01"
+ *       - in: query
+ *         name: to
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: End date .
+ *         example: "2026-04-30"
+ *     responses:
+ *       200:
+ *         description: Energy data for all machines retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: Internal server error
+ *                 error:
+ *                   type: string
+ *                 stack:
+ *                   type: string
+ */
