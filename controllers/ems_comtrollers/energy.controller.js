@@ -22,6 +22,10 @@ async function getEnergyData(params) {
 SELECT
     hour_time,
     ROUND(KWh,2) AS kwh,
+    ROUND(
+        KWh - LAG(KWh) OVER (ORDER BY hour_time),
+        2
+    ) AS consumption_kwh,
     ROUND(current_avg,2) AS current_avg,
     ROUND(current_i1,2) AS current_i1,
     ROUND(current_i2,2) AS current_i2,
@@ -35,6 +39,14 @@ ORDER BY hour_time;`;
 
 }
 
+async function getEnergyDataAllMachines(params) {
+
+    const [rows] = await db.query(`SELECT name FROM mfm_map`);
+
+    console.log(rows);
+
+}
 module.exports = {
-    getEnergyData
+    getEnergyData,
+    getEnergyDataAllMachines
 };
