@@ -4,7 +4,7 @@ async function getEnergyData(params) {
 
     const sql = `WITH hourly_data AS (
     SELECT
-        DATE_FORMAT(date_time, '%Y-%m-%d %H:00:00') AS hour_time,
+        DATE_FORMAT(date_time, '%Y-%m-%d %H:00') AS hour_time,
         KWh,
         current_avg,
         current_i1,
@@ -15,8 +15,8 @@ async function getEnergyData(params) {
             ORDER BY date_time DESC
         ) AS rn
     FROM ${params.meter_name}
-    WHERE date_time >= ?
-    AND date_time <  ?
+    WHERE DATE(date_time) >= ?
+    AND DATE(date_time) <  ?
 )
 
 SELECT

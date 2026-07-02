@@ -1179,3 +1179,81 @@
  *                   type: string
  *                   example: Failed to fetch PLC status
  */
+/**
+ * @swagger
+ * /api/mfm/energyData:
+ *   get:
+ *     summary: Get energy consumption data for a meter
+ *     description: Returns energy data for the specified meter within the given date and time range.
+ *     tags:
+ *       - MFM Routes
+ *     parameters:
+ *       - in: query
+ *         name: meterName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the energy meter.
+ *         example: d_and_d
+ *       - in: query
+ *         name: from
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Start date .
+ *         example: "2026-02-01"
+ *       - in: query
+ *         name: to
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: End date .
+ *         example: "2026-05-01"
+ *     responses:
+ *       200:
+ *         description: Energy data retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *       400:
+ *         description: No data found for the specified meter and date range.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 Msg:
+ *                   type: string
+ *                   example: "Data not found for meter: d_and_d and date range: 2026-02-01 to 2026-05-01."
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: Internal server error
+ *                 error:
+ *                   type: string
+ *                 stack:
+ *                   type: string
+ */
