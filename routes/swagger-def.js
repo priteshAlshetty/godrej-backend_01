@@ -1041,6 +1041,93 @@
  *       500:
  *         description: Internal server error
  */
+
+
+/**
+ * @swagger
+ * /api/download/csv:
+ *   get:
+ *     summary: Download cyclic logged machine data as a CSV file
+ *     description: Generates and sends a CSV file containing machine data for the specified table and date/time range.
+ *     tags:
+ *       - CSV Export
+ *     parameters:
+ *       - in: query
+ *         name: tableName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the machine data table.
+ *         example: anode_mixer
+ *       - in: query
+ *         name: from
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Start date.
+ *         example: "2026-04-17"
+ *       - in: query
+ *         name: to
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: End date.
+ *         example: "2026-04-30"
+ *     responses:
+ *       200:
+ *         description: CSV file generated and downloaded successfully.
+ *         content:
+ *           text/csv:  
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         description: Missing required query parameters.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Missing required query parameters: tableName, from, to"
+ *       404:
+ *         description: No machine data found or generated file not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "No machine data found for the specified date range."
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 errMsg:
+ *                   type: string
+ *                   example: "Internal server error"
+ *                 error:
+ *                   type: string
+ *                 error_stack:
+ *                   type: string
+ */
+
 /**
  * @swagger
  * /api/mfm/meterNames:
