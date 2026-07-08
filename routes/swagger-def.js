@@ -166,6 +166,49 @@
  *                   example: Error at api request /api/signup/add-user  ==>y catch block
  */
 
+/**
+ * @swagger
+ * tags:
+ *   - name: Battery Cell
+ *     description: APIs for retrieving battery, cell, and batch IDs
+ *
+ * /api/batteryIds:
+ *   get:
+ *     summary: Get all battery IDs
+ *     tags: [Get IDs]
+ *     responses:
+ *       200:
+ *         description: Battery IDs retrieved successfully
+ *       400:
+ *         description: Battery ID data not found
+ *       500:
+ *         description: Internal server error
+ *
+ * /cellIds:
+ *   get:
+ *     summary: Get all cell IDs
+ *     tags: [Get IDs]
+ *     responses:
+ *       200:
+ *         description: Cell IDs retrieved successfully
+ *       400:
+ *         description: Cell ID data not found
+ *       500:
+ *         description: Internal server error
+ *
+ * /api/batchIds:
+ *   get:
+ *     summary: Get all batch IDs
+ *     tags: [Get IDs]
+ *     responses:
+ *       200:
+ *         description: Batch IDs retrieved successfully
+ *       400:
+ *         description: Batch ID data not found
+ *       500:
+ *         description: Internal server error
+ */
+
 // api/upload/end-of-line:
 /**
  * @swagger
