@@ -75,9 +75,15 @@ router.get("/energyData", async (req, res) => {
         };
         const result = await getEnergyData(params);
         if (result) {
+            const totalEnergy = result.reduce((acc, curr) => {
+                return acc + (Number(curr.consumption_kwh) || 0);
+            }, 0);
+            console.log('Total Energy:', totalEnergy);
+
             res.status(200).json({
                 success: true,
-                data: result
+                data: result,
+                totalEnergy: totalEnergy
             });
         } else {
             res.status(400).json({
