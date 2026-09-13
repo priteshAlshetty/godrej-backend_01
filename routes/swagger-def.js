@@ -1445,3 +1445,158 @@
  *                 stack:
  *                   type: string
  */
+/**
+ * @swagger
+ * /api/getDatewiseBatchData:
+ *   get:
+ *     summary: Get batch data for a given date range
+ *     description: Returns all batch records between the given from and to dates.
+ *     tags:
+ *       - Datewise Batch Data
+ *     parameters:
+ *       - in: query
+ *         name: from
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *           example: "2026-02-01"
+ *         description: Start date (yyyy-MM-dd)
+ *       - in: query
+ *         name: to
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *           example: "2026-02-22"
+ *         description: End date (yyyy-MM-dd)
+ *     responses:
+ *       200:
+ *         description: Batch data fetched successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               data:
+ *                 - batch_id: "CB 22-02-2026 10"
+ *                   start_timestamp: "2026-02-22T05:03:47.000Z"
+ *                   stop_timestamp: "2026-02-22T05:30:00.000Z"
+ *                   mixing_time: 27
+ *                   ambient_temp: 26.5
+ *                   Humidity: 55
+ *                   final_paste_temp: 42.3
+ *                   max_current: 18.2
+ *                   max_torque: 65
+ *                   recipe_id: "RCP-104"
+ *                   batch_size: 500
+ *                   paste_moisture: 12.4
+ *                   paste_density: 3.42
+ *                   water: 85.5
+ *                   teflon: 4.2
+ *                   zinc_emd: 320
+ *                   graphite_indium: 15.6
+ *                   bismuth: 2.1
+ *                   laponite: 1.8
+ *                   penetration: 22
+ *                   BNB90: 3.4
+ *                   MX25: 1.1
+ *                 - batch_id: "AB 22-02-2026 10"
+ *                   start_timestamp: "2026-02-22T04:27:48.000Z"
+ *                   stop_timestamp: "2026-02-22T04:55:12.000Z"
+ *                   mixing_time: 28
+ *                   ambient_temp: 27.1
+ *                   Humidity: 53
+ *                   final_paste_temp: 41.9
+ *                   max_current: 17.8
+ *                   max_torque: 64.2
+ *                   recipe_id: "RCP-104"
+ *                   batch_size: 500
+ *                   paste_moisture: 12.1
+ *                   paste_density: 3.4
+ *                   water: 85.2
+ *                   teflon: 4.1
+ *                   zinc_emd: 318
+ *                   graphite_indium: 15.4
+ *                   bismuth: 2
+ *                   laponite: 1.7
+ *                   penetration: 21
+ *                   BNB90: 3.3
+ *                   MX25: 1
+ *       400:
+ *         description: Missing required query parameters
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "Missing required query parameters: from and to"
+ *       404:
+ *         description: No batch data found for the given range
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "No batch data found for the selected date range"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "Internal server error"
+ */
+/**
+ * @swagger
+ * /api/getDatewiseBatchCSV:
+ *   get:
+ *     summary: Download batch data for a given date range as CSV
+ *     description: Generates and returns a CSV file containing batch records between the given from and to dates.
+ *     tags:
+ *       - Datewise Batch Data
+ *     parameters:
+ *       - in: query
+ *         name: from
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *           example: "2026-02-01"
+ *         description: Start date (yyyy-MM-dd)
+ *       - in: query
+ *         name: to
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *           example: "2026-02-22"
+ *         description: End date (yyyy-MM-dd)
+ *     responses:
+ *       200:
+ *         description: CSV file containing batch data
+ *         content:
+ *           text/csv:
+ *             example: |
+ *               batch_id,start_timestamp,stop_timestamp,mixing_time,ambient_temp,Humidity,final_paste_temp,max_current,max_torque,recipe_id,batch_size,paste_moisture,paste_density,water,teflon,zinc_emd,graphite_indium,bismuth,laponite,penetration,BNB90,MX25
+ *               "CB 22-02-2026 10","2026-02-22T05:03:47.000Z","2026-02-22T05:30:00.000Z",27,26.5,55,42.3,18.2,65,"RCP-104",500,12.4,3.42,85.5,4.2,320,15.6,2.1,1.8,22,3.4,1.1
+ *               "AB 22-02-2026 10","2026-02-22T04:27:48.000Z","2026-02-22T04:55:12.000Z",28,27.1,53,41.9,17.8,64.2,"RCP-104",500,12.1,3.4,85.2,4.1,318,15.4,2,1.7,21,3.3,1
+ *       400:
+ *         description: Missing required query parameters
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "Missing required query parameters: from and to"
+ *       404:
+ *         description: No batch data found for the given range
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "No batch data found for the selected date range"
+ *       500:
+ *         description: Internal server error while generating or sending the CSV file
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               message: "Internal server error"
+ */
